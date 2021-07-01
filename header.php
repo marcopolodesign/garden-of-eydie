@@ -23,10 +23,45 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'garden-of-eydie' ); ?></a>
 
-	<header id="masthead" class="site-header">
+	<header id="masthead" class="site-header flex jic fixed top-0 left-0 w-100 pv3 ph5">
+		<div class="left-header">
+			<nav>
+				<?php
+					wp_nav_menu( array(
+						'theme_location' => 'menu-1',
+						'menu_id'        => 'header-left-menu',
+						'container' => 'ul',
+						'menu_class' => 'header-nav w-max ml-auto mr-0 flex jic list-none',
+					) );
+					?>
+				</nav>
+		</div>
 
+		<a href="/">
+			<?php get_template_part('template-parts/content/logo');?>
+		</a>
+
+		<div class="right-header flex jic">
+			<div class="flex items-center">
+				<p class="mr2">Search</p>
+				<?php get_template_part('template-parts/content/search');?>
+			</div>
+
+			<p class="mh4">Menu</p>
+			
+			<div class="header-social flex items-center">
+				<a href>
+					<?php get_template_part('template-parts/content/pinterest');?>
+				</a>
+				<a class="mh3" href>
+					<?php get_template_part('template-parts/content/youtube');?>
+				</a>
+				<a href>
+					<?php get_template_part('template-parts/content/insta');?>
+				</a>
+			</div>
+		</div>
 	</header><!-- #masthead -->
 
 
