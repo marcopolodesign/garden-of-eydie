@@ -27,6 +27,10 @@ p {
   background-color: var(--mainColor);
 }
 
+.main-color {
+  color: var(--mainColor);
+}
+
 .bg-color-container {
   z-index: -2;
   width: 100vw;
@@ -69,7 +73,6 @@ p {
 header {
   transition: all 0.3s ease;
   z-index: 9;
-  background-color: #fff;
 }
 
 .right-header,
@@ -234,16 +237,53 @@ header.scrolled svg path {
   padding: 4rem;
 }
 
+.newsletter-container.form-w-100 .form-container,
+.newsletter-container.form-w-100 h1 {
+  width: 100%;
+}
+
 .form-container {
   border: 2px solid black;
+}
+
+.white-form .form-container {
+  border-color: #fff;
+}
+
+.white-form svg path {
+  fill: #fff;
+}
+
+.white-form .form-container input::placeholder {
+  color: #fff;
+}
+
+.white-form .subscribe-form-button {
+  background-image: url(/wp-content/uploads/2021/07/Group-6.svg) !important;
+}
+
+.j-around .form-container form {
+  justify-content: space-around;
+}
+
+.no-caption p:last-child {
+  display: none;
 }
 
 .form-container form > div:last-child {
   height: 21px;
 }
 
-#main {
+#main:not(.no-mt) {
   margin-top: 80px;
+}
+
+#main.no-mt > section:first-child > div:first-child {
+  padding-top: 120px;
+}
+
+#main.totm > section:first-child > div:first-child {
+  padding-top: 180px;
 }
 
 /* Home Desktop */
@@ -257,6 +297,13 @@ article.post-container {
   width: 100%;
 }
 
+.post-grid-scroll-container article {
+  width: 300px;
+}
+
+.post-grid-scroll-container article:first-child {
+  margin-left: 0;
+}
 /* Cat Desktop */
 
 #cat-name {
@@ -275,6 +322,17 @@ article.post-container {
   height: 60vh;
 }
 
+/* About Desktop */
+.mission h1 {
+  border-bottom: 1px solid #000;
+}
+
+.mission span {
+  flex-grow: 1;
+  border-bottom: 1px solid #000;
+  height: 1px;
+}
+
 /* Lifestlye Desktop */
 
 .lifestyle-cat {
@@ -289,6 +347,55 @@ article.post-container {
 
 .lifestyle-cover h1.small-font {
   font-size: 180px;
+}
+
+/* FAQ */
+
+.featured-faq {
+  max-width: 30%;
+}
+
+.featured-faq p {
+  font-size: 14px;
+}
+
+/* Community Desktop */
+
+.community-cta {
+  transform: translate(2%, -5%);
+}
+
+.community-cta > div:last-child {
+  transform: translateX(-10%);
+}
+
+/* Page Desktop Generals */
+
+.f0 {
+  font-size: 82px;
+}
+
+.f00 {
+  font-size: 140px;
+}
+
+.page-description p {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.page-title-small {
+  letter-spacing: 0.38em;
+  font-weight: 300;
+  font-size: 13px;
+}
+
+/* Template Content Desktop */
+
+/* Grid  */
+.grid-container div:nth-child(even) {
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
 }
 
 @media (max-width: 768px) {

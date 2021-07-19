@@ -1,6 +1,7 @@
 console.log('start travel!');
 let pageName = document.querySelector('[data-barba=container]');
 let preLoad = document.querySelectorAll('.pre-load');
+let header = document.querySelector('header')
 
 let docuHeight = document.body.clientHeight;
 let color;
@@ -73,12 +74,30 @@ const runScripts = () => {
     };
 
     document.addEventListener('mousemove', (event) => {
-      moveCursor(event.pageX, event.pageY);
+      // moveCursor(event.pageX, event.pageY);
     });
 
     document.addEventListener('scroll', (event) => {
       moveCursor(event.pageX, event.pageY);
     });
+  }
+
+  const headerColor = () => {
+      let hasBackground = document.querySelector('#main.no-mt');
+
+        if (!hasBackground) {
+            header.classList.add('bg-white')
+            console.log('no-bg')
+
+        } else {
+          header.classList.remove('bg-white')
+          console.log('has-bg')
+        }
+
+        document.addEventListener('scroll' , () => {
+          header.classList.add('bg-white');
+        })
+
   }
 
   const animateSVG = (willAnimate) => {
@@ -134,18 +153,41 @@ const runScripts = () => {
     const faq = document.querySelectorAll('.faq-item');
     let categories = document.querySelectorAll('.faq-category');
 
-    // Expand Questions on click
-    faq.forEach((q) => {
-      q.addEventListener('click', () => {
-        const isExpanded = q.getAttribute('area-expanded');
+  
+      faq.forEach(q => {
+        let isExpanded = q.getAttribute('area-expanded');
+        q.addEventListener('click', (e)=> {
+          console.log(isExpanded)
+          let answer = q.querySelector('.faq-answer');
+          let arrow = q.querySelector('svg');
+  
+          let height = answer.querySelector('p').clientHeight ;   
+          console.log(height)
 
-        if (isExpanded === 'false') {
-          q.setAttribute('area-expanded', 'true');
-        } else {
-          q.setAttribute('area-expanded', 'false');
-        }
-      });
-    });
+          let faq = gsap.timeline({
+            defaults: {
+              easing: Expo.EaseOut,
+              duration: 0.2,
+            },
+          })
+  
+          if (!isExpanded) {
+            faq
+            // .to(arrow, {transform: 'rotate(-90deg)'})
+            .to (answer, { opacity: 0})
+            .to (answer, {maxHeight: "0", opacity: 0}, 0.15)
+              console.log('reverse')
+              isExpanded = true;  
+          } else {
+            faq
+            // .to(arrow, {transform: 'rotate(0deg)'})
+            .to (answer, {maxHeight: height})
+            .to (answer, { opacity: 1}, 0.3)
+            isExpanded = false;  
+          }          
+        })
+      })
+  
 
     const filters = document.querySelectorAll('.faq-filter h2');
 
@@ -159,7 +201,7 @@ const runScripts = () => {
           q.style.display = 'none';
           if (faqCat === cat) {
             q.style.display = '';
-          } else if (cat === 'Ver todos') {
+          } else if (cat === 'View All') {
             q.style.display = '';
           } else {
             q.style.display = 'none';
@@ -170,7 +212,6 @@ const runScripts = () => {
   };
 
 
-
   function googleAnalytics() {
     gtag('event', 'page_view', {
       page_location: 'https://art.mirandabosch.com',
@@ -179,13 +220,9 @@ const runScripts = () => {
     })
   }
 
-
-
-
   const fbTrack = () => {
     fbq('track', 'PageView');
   }
-
 
 
   const initScripts = () => {
@@ -193,29 +230,22 @@ const runScripts = () => {
       // postAnimations();
     }
 
-    bgColor();
+    let hasFaq = document.querySelector('.faq-container');
 
-    if (checkoutForm) {
-      checkoutDetails();
-
-
-      setTimeout(() => {
-        document.querySelector('.wc_payment_method.payment_method_woo-mercado-pago-basic label').innerHTML = `<p class="tc mb3>Pagar con tu cuenta de Mercado Pago. Al tocar "finalizar compra" serás redirigido al portal de Mercado pago para pagar </p>
-            <img src="https://mbgallery.local/wp-content/plugins/woocommerce-mercadopago/includes/../assets/images/mercadopago.png" alt="Paga con el medio de pago que prefieras">
-            `;
-      }, 5000);
-
-
-
+    if (hasFaq) {
+      faq();
     }
+
+    // bgColor();
+
   };
 
+  headerColor();
   // postAnimations();
   initScripts();
-  fbTrack();
+  // fbTrack();
   // googleAnalytics();
   allCursor();
-  postAnimations();
 
   // changeFooter();
 };
@@ -436,7 +466,7 @@ barba.init({
 
           timeline
             .call(() => {
-              preLoad.classList.remove('animate');
+              preLoad[0].classList.remove('animate');
             })
             .set(next.container, { opacity: 0, x: '10%' })
             .to(preLoad, { x: '-100%', opacity: 1, duration: 2.3 }, 0)
@@ -463,8 +493,8 @@ barba.init({
   debug: true,
 });
 
-// runScripts();
-// 
+runScripts();
+
 
 
 // First we get the viewport height and we multiple it by 1% to get a value for a vh unit

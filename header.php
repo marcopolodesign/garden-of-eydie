@@ -24,7 +24,7 @@
 <?php wp_body_open(); ?>
 <div id="page" class="site">
 
-	<header id="masthead" class="site-header flex jic fixed top-0 left-0 w-100 pv3 ph5">
+	<header id="masthead" class="site-header flex jic fixed top-0 left-0 w-100 pv3 ph5 bg-white">
 		<div class="left-header">
 			<nav>
 				<?php
@@ -64,6 +64,10 @@
 		</div>
 	</header><!-- #masthead -->
 
+
+	<div class="cursor desktop"></div>
+	<div class="pre-load bg-main-color"></div>
+	<div class="pre-load bg-white"></div>
 
 	<div data-barba="wrapper">
 

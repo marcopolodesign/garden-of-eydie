@@ -11,6 +11,8 @@
 
 ?>
 
+</div> <!-- End Barba Container -->
+
 	<footer id="colophon" class="site-footer mt6">
 	<section class="instagram-feed-container mv5 container-xs">
 	<div class="flex jic">
