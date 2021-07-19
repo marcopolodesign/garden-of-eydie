@@ -50,7 +50,9 @@ if ( ! function_exists( 'garden_of_eydie_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'menu-1' => esc_html__( 'Primary', 'garden-of-eydie' ),
+				'menu-1' => esc_html__( 'Left Header', 'garden-of-eydie' ),
+				'menu-2' => esc_html__( 'Right Header', 'garden-of-eydie' ),
+				'menu-3' => esc_html__( 'Footer', 'garden-of-eydie' ),
 			)
 		);
 
@@ -201,3 +203,9 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
+
+add_post_type_support('page', array('excerpt'));
+
+add_post_type_support('page', array('category'));
+
+

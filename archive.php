@@ -10,42 +10,55 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+<main id="main" data-barba="container" data-barba-namespace="lifestyle" class="category" bg-color="white">
 
-		<?php if ( have_posts() ) : ?>
+	<section class="cat-header first-content ph5">
+		<h1 id="cat-name" class="ttu tc f1"><?php single_cat_title();?></h1>
 
-			<header class="page-header">
-				<?php
-				the_archive_title( '<h1 class="page-title">', '</h1>' );
-				the_archive_description( '<div class="archive-description">', '</div>' );
-				?>
-			</header><!-- .page-header -->
-
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
-
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', get_post_type() );
-
-			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
+		<?php
+			$catPost = array(
+					'post_type' => 'post',
+					'posts_per_page' => 1,
+					'order'=> 'DESC',
+			);
+			$post_query = new WP_Query($catPost);
+			if($post_query->have_posts() ) : while($post_query->have_posts() ) :
+			$post_query->the_post(); 
+			
+				get_template_part('template-parts/featured-cat');
+			
+			wp_reset_postdata();		endwhile; endif; 
 		?>
+
+
+
+
+	</section>
+
+	<section class="mt6">
+		<h1 class="ttu center tc mb4">LATEST POSTS</h1>
+		<div class="container flex flex-wrap jic w-100">
+		<?php
+			$lifestylePosts = array(
+					'post_type' => 'post',
+					'posts_per_page' => 9,
+					'order'=> 'DESC',
+			);
+			$post_query = new WP_Query($lifestylePosts);
+			if($post_query->have_posts() ) : while($post_query->have_posts() ) :
+			$post_query->the_post(); 
+			get_template_part( 'template-parts/post-query', get_post_type() );
+		endwhile; 
+		else :
+			get_template_part( 'template-parts/content', 'none' );
+	endif; wp_reset_postdata();
+	?>
+	</div>
+
+</section>
+
 
 	</main><!-- #main -->
 
 <?php
-get_sidebar();
 get_footer();
