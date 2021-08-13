@@ -14,73 +14,7 @@ const runScripts = () => {
   console.log(pageName);
   docuHeight = document.body.clientHeight;
 
-  function allCursor() {
-    let cursor = document.querySelector('.cursor');
-    allAnchors = Array.prototype.slice.call(document.querySelectorAll('a, .anchor'));
-    let extraAnchors = Array.prototype.slice.call(document.querySelectorAll('.anchor'));
-    buttons = Array.prototype.slice.call(document.querySelectorAll('button'));
 
-    anchors = allAnchors.concat(extraAnchors);
-    anchors = allAnchors.concat(buttons);
-
-    let anchorContainer = document.querySelectorAll('.main-cta');
-
-    const changeCursorColor = () => {
-      anchorContainer.forEach((container) => {
-        const color = container.getAttribute('cursor-color');
-
-        if (color === 'red') {
-          cursor.classList.remove('black');
-          cursor.classList.add('red');
-        } else if (color === 'black') {
-          cursor.classList.remove('red');
-          cursor.classList.add('black');
-        }
-      });
-    };
-
-    const hoverCursor = () => {
-      cursor.classList.add('is-hover');
-    };
-
-    const removeHoverCursor = () => {
-      cursor.classList.remove('is-hover');
-      cursor.classList.remove('is-shop');
-      cursor.classList.remove('add-cart');
-    };
-
-    anchors.forEach((anchor) => {
-      anchor.addEventListener('mouseover', () => {
-        if (anchor.classList.contains('is-shoppable')) {
-          cursor.classList.add('is-shop');
-        } else if (anchor.classList.contains('single_add_to_cart_button')) {
-          cursor.classList.add('add-cart');
-        } else {
-          hoverCursor();
-        }
-      });
-    });
-
-    anchors.forEach((anchor) => {
-      anchor.addEventListener('mouseleave', () => {
-        removeHoverCursor();
-      });
-    });
-
-    const moveCursor = (x, y) => {
-      cursor.style.top = y + 'px';
-      cursor.style.left = x + 'px';
-      changeCursorColor();
-    };
-
-    document.addEventListener('mousemove', (event) => {
-      // moveCursor(event.pageX, event.pageY);
-    });
-
-    document.addEventListener('scroll', (event) => {
-      moveCursor(event.pageX, event.pageY);
-    });
-  }
 
   const headerColor = () => {
       let hasBackground = document.querySelector('#main.no-mt');
@@ -131,22 +65,6 @@ const runScripts = () => {
       duration: 1500,
       // loop: true,
     });
-  };
-
-  const scrollTo = (array, target) => {
-    let n;
-    if (array.length > 0) {
-      array.forEach((i) => {
-        i.addEventListener('click', (e) => {
-          n = array.indexOf(e.target);
-
-          window.scrollTo({
-            top: target[n].offsetTop - 150,
-            behavior: 'smooth',
-          });
-        });
-      });
-    }
   };
 
   const faq = () => {
@@ -245,7 +163,7 @@ const runScripts = () => {
   initScripts();
   // fbTrack();
   // googleAnalytics();
-  allCursor();
+  // allCursor();
 
   // changeFooter();
 };
@@ -418,7 +336,44 @@ const instagram = () => {
 
 instagram();
 
-// Para páginas individuales de grados
+
+const carrousel = () => {
+  let slider = document.querySelector('.marco-carrousel > div');
+  let controllers = Array.prototype.slice.call(document.querySelectorAll('.dot'));
+
+  controllers.forEach((c,i) => {
+    c.addEventListener('click', ()=> {
+      slider.style.transitionDelay = "0s !important"
+      controllers.forEach(c => {
+        c.classList.remove('active')
+      });
+      c.classList.add('active');
+     if (i < 0) {
+       slider.style.left = "80vw"
+     } else {
+       slider.style.left = i * -86 + "vw";
+     }
+    })
+  })
+}
+
+const scrollTo = (array, target) => {
+  let n;
+  if (array.length > 0) {
+    array.forEach((i) => {
+      i.addEventListener('click', (e) => {
+        n = array.indexOf(e.target);
+
+        console.log(target[n].offsetTop)
+        window.scrollTo({
+          top: target[n].getBoundingClientRect().top + window.scrollY - 150,
+          behavior: 'smooth',
+        });
+      });
+    });
+  }
+};
+
 
 
 barba.init({
@@ -480,15 +435,30 @@ barba.init({
     {
       namespace: 'home',
       afterEnter(data) {
+
       },
     },
 
+    {
+      namespace: 'recipes', 
+      afterEnter (data) {
+        carrousel();
+      }
+    },  {
+      namespace: 'recipe', 
+      afterEnter(data) {
+        let index = Array.prototype.slice.call(document.querySelectorAll('.recipe-index h2'));
+        let sections = Array.prototype.slice.call(document.querySelectorAll('.recipe-section .mission h1'));
+        scrollTo(index, sections);
+      }
+    },
     {
       namespace: 'lifestyle', 
       afterEnter (data) {
         lifestyle();
       }
     }
+
   ],
   debug: true,
 });

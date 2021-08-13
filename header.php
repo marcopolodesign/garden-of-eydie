@@ -51,21 +51,32 @@
 			<p class="mh4">Menu</p>
 			
 			<div class="header-social flex items-center">
-				<a href>
-					<?php get_template_part('template-parts/content/pinterest');?>
+				<?php if( have_rows('header_social', 341) ): while( have_rows('header_social', 341) ): the_row(); 	
+				$network = get_sub_field('icon');
+				?>
+
+				<a href=<?php the_sub_field('link');?> class="mh3">
+				<?php
+
+					if ($network == "Pinterest"): 
+						get_template_part('template-parts/content/pinterest');
+					elseif ($network == "Twitter") :
+						get_template_part('template-parts/content/twitter');
+					elseif ($network == "Instagram") :
+						get_template_part('template-parts/content/insta');
+					elseif ($network == "Youtube") :
+						get_template_part('template-parts/content/youtube');
+					else : endif;?>
 				</a>
-				<a class="mh3" href>
-					<?php get_template_part('template-parts/content/youtube');?>
-				</a>
-				<a href>
-					<?php get_template_part('template-parts/content/insta');?>
-				</a>
+
+				<?php endwhile; endif;?>
+
 			</div>
 		</div>
 	</header><!-- #masthead -->
 
 
-	<div class="cursor desktop"></div>
+	<!-- <div class="cursor desktop"></div> -->
 	<div class="pre-load bg-main-color"></div>
 	<div class="pre-load bg-white"></div>
 
