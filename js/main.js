@@ -570,6 +570,14 @@ const moveSlides = () => {
   
 }
 
+const recipeDropdown = () => {
+  let dropdown = document.querySelector('.recipe-select');
+
+  dropdown.addEventListener('change', (e)=> {
+    window.location = e.target.value;
+  })
+}
+
 
 
 
@@ -640,6 +648,7 @@ barba.init({
       namespace: 'recipes', 
       afterEnter (data) {
         carrousel();
+        recipeDropdown();
       }
     },  {
       namespace: 'recipe', 
@@ -654,6 +663,12 @@ barba.init({
       afterEnter (data) {
         lifestyle();
       }
+    },
+    {
+      namespace: 'archive',
+      afterEnter(data){ 
+        recipeDropdown();
+      },
     }
 
   ],

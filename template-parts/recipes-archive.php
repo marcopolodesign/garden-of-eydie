@@ -6,20 +6,6 @@
     <h1 class="mt3 f1 ttu"><?php single_cat_title();?></h1>
     <ul class="sub-categories-list flex flex-wrap mt4">
       <?php 
-
-      // $args = array(
-      //   'child_of' => get_queried_object_id(),
-      //   'hierarchical' =>1 ,
-      //   'title_li'     => "",
-      //   "orderby" => 'name',
-      //   "post_per_page" => -1,
-      // );
-
-      // $subCats = get_categories($args);
-      // foreach ($subCats as $cat) :
-      //   $name = $cat->name; 
-      //   echo $name;
-      // endforeach;
       wp_list_categories(
         array(
             'child_of' => get_queried_object_id(), // this will be ID of current category in a category archive
@@ -33,9 +19,10 @@
     <div class="relative mt5 mb3 w-max">
       <select class="sub-list-select">
         <option><?php single_cat_title();?></option>
+        <?php get_template_part('template-parts/recipe-options');?>
       </select>
 
-      <a href="/recipes" class="absolute top-50 right-50" >
+      <a href="javascript:history.back()" class="absolute top-50 right-50" >
         <svg style="transform: translate(-50%, -50%)" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="11" fill="black"/>
           <path d="M14.2356 8.41162L8.41211 14.2352" stroke="white"/>

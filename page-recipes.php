@@ -36,10 +36,11 @@ get_header();?>
 
   <section class="search-box-container container">
     <!-- Here goes search box -->
-    <h1 class="tc f1 mb3">Search our entire recipes index</h1>
+    <h1 class="tc f1 mb3 ttu">Easy Plant based recipes you'll love</h1>
     <div class="flex justify-center search-form w-100 container">
-      <select class="text pa2 main-font f3 mr4">
+      <select class="text pa2 main-font f3 mr4 recipe-select">
         <option disabled selected>All recipes</option>
+          <?php get_template_part('template-parts/recipe-options'); ?>
       </select>
       <form method="get" class="flex w-100 " id="searchform" action="<?php bloginfo('url'); ?>">
         <div class="flex w-100 jic">
