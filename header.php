@@ -16,6 +16,9 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+
+	<script src="/includes/CustomEase.js"></script>
 
 	<?php wp_head(); ?>
 </head>
@@ -43,29 +46,51 @@
 		</a>
 
 		<div class="right-header flex jic">
-			<div class="flex items-center">
+			<div class="flex items-center search-trigger pointer">
 				<p class="mr2">Search</p>
 				<?php get_template_part('template-parts/content/search');?>
 			</div>
 
-			<p class="mh4">Menu</p>
+		<div class="menu-trigger pointer flex flex-column">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+
 			
 			<div class="header-social flex items-center">
-				<a href>
-					<?php get_template_part('template-parts/content/pinterest');?>
+				<?php if( have_rows('header_social', 341) ): while( have_rows('header_social', 341) ): the_row(); 	
+				$network = get_sub_field('icon');
+				?>
+
+				<a href=<?php the_sub_field('link');?> class="mh3">
+				<?php
+
+					if ($network == "Pinterest"): 
+						get_template_part('template-parts/content/pinterest');
+					elseif ($network == "Twitter") :
+						get_template_part('template-parts/content/twitter');
+					elseif ($network == "Instagram") :
+						get_template_part('template-parts/content/insta');
+					elseif ($network == "Youtube") :
+						get_template_part('template-parts/content/youtube');
+					else : endif;?>
 				</a>
-				<a class="mh3" href>
-					<?php get_template_part('template-parts/content/youtube');?>
-				</a>
-				<a href>
-					<?php get_template_part('template-parts/content/insta');?>
-				</a>
+
+				<?php endwhile; endif;?>
+
 			</div>
 		</div>
 	</header><!-- #masthead -->
 
 
-	<div class="cursor desktop"></div>
+	<?php 
+	get_template_part('template-parts/menu'); 
+get_template_part('template-parts/search');
+	?>
+
+
+	<!-- <div class="cursor desktop"></div> -->
 	<div class="pre-load bg-main-color"></div>
 	<div class="pre-load bg-white"></div>
 

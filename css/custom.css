@@ -68,11 +68,37 @@ p {
   color: var(--grey);
 }
 
+div.main-font * {
+  font-family: var(--mainFont);
+  font-weight: 400;
+}
+
+.featured-text {
+  font-size: 1.6rem;
+  line-height: 1.6;
+}
+
 /* Header & Footer Desktop */
 
 header {
-  transition: all 0.3s ease;
+  transition: background-color 0.3s ease;
   z-index: 9;
+}
+
+.header-social a:first-child {
+  margin-left: 0;
+}
+
+.header-social a:hover svg path {
+  transition: all 0.3s ease;
+}
+
+.header-social a:hover svg path {
+  fill: var(--mainColor);
+}
+
+.header-social a:last-child {
+  margin-right: 0;
 }
 
 .right-header,
@@ -94,6 +120,7 @@ header.scrolled {
   /* border-bottom: 1px solid var(--darkPink);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px); */
+  border-bottom: 1px solid black;
 }
 
 header.scrolled p,
@@ -230,6 +257,95 @@ header.scrolled svg path {
   color: #ccc;
 }
 
+/* Menu Desktop */
+
+.menu-trigger span {
+  width: 16px;
+  height: 2px;
+  margin-bottom: 3px;
+  background-color: black;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.menu-trigger {
+  width: 28px;
+}
+
+.menu-trigger:hover span {
+  background-color: var(--mainColor);
+}
+
+.menu-trigger:hover span:nth-child(2) {
+  width: 28px;
+  transform: translateX(-5px);
+}
+
+.menu-trigger span:nth-child(2) {
+  width: 22px;
+  transform: translateX(-3px);
+}
+
+.menu-trigger span:last-child {
+  margin-bottom: 0;
+}
+
+.menu-container,
+.menu-container .bg-main-color {
+  z-index: 99;
+}
+
+.menu-container .bg-main-color {
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.side-menu {
+  z-index: 100;
+}
+
+ul.menu-nav > li {
+  margin-bottom: 20px;
+  overflow: hidden;
+  transform: translateY(40px);
+}
+
+ul.menu-nav li a {
+  font-family: var(--mainFont);
+  font-size: 62px;
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+  transform: translateY(100%);
+}
+
+.sub-menu {
+  position: absolute;
+  left: 60%;
+  top: 0%;
+  z-index: 101;
+  opacity: 0;
+  list-style-type: none;
+  list-style: none;
+}
+
+.sub-menu li {
+  margin-bottom: 10px;
+}
+
+.sub-menu a {
+}
+
+.side-menu li:hover .sub-menu,
+.side-menu li:hover > a {
+  opacity: 1;
+}
+
+.sub-menu li a {
+  transform: translateY(0) !important;
+  transition: opacity 0.3s ease;
+  font-size: 24px !important;
+}
+
 /* Newsletter Subscribe */
 
 .newsletter-container {
@@ -282,13 +398,152 @@ header.scrolled svg path {
   padding-top: 120px;
 }
 
+#main.no-mt.home > section:first-child > div:first-child {
+  padding-top: 0px;
+}
+
 #main.totm > section:first-child > div:first-child {
   padding-top: 180px;
 }
 
 /* Home Desktop */
 
-article.post-container {
+.slide:first-child .s-bg-color,
+.slide:first-child .slide-text,
+.slide:first-child .s-bg-img,
+.slide:first-child .slide-img {
+  /* opacity: 1; */
+  pointer-events: none;
+}
+
+/* Set Up Intro Slide */
+
+.slide:first-child .s-bg-color {
+  width: 0%;
+  opacity: 1;
+}
+
+:root {
+  --duration: 1s;
+}
+
+.s-bg-color.is-open {
+  transition: width var(--duration) cubic-bezier(0.77, 0, 0.175, 1) 0.2s;
+  width: 100% !important;
+}
+
+.s-bg-img > div.is-open {
+  clip-path: inset(0) !important;
+  transition: clip-path var(--duration) cubic-bezier(0.77, 0, 0.175, 1) 0.2s;
+}
+
+.s-bg-color {
+  transition: width 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.slide:first-child .s-bg-img > div {
+  clip-path: inset(0px 0px 0px 100%);
+  opacity: 1;
+}
+
+.s-bg-img > div {
+  transition: clip-path 0.7s ease;
+}
+
+.slide:first-child .slide .s-bg-img > div {
+  opacity: 1;
+}
+
+.s-bg-img > div {
+  clip-path: inset(0px 0px 0px 100%);
+}
+
+.slide .s-bg-color,
+.slide .slide-text,
+.slide .slide-img {
+  opacity: 0;
+}
+
+.slide-img {
+  right: 0%;
+  top: 50%;
+  transform: translate(-36%, -50%);
+}
+
+.slide-img img {
+  max-height: 500px;
+}
+
+.slider-controller {
+  bottom: 15%;
+}
+
+.slider-controller span {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.397);
+  height: 2px;
+  width: 130px;
+  display: block;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.slider-controller span span {
+  position: absolute;
+  width: 0;
+  height: 4px;
+  margin-bottom: 3px;
+  transform: translateY(-0.5px);
+  /* transition: width 0.3s ease; */
+  background-color: #000;
+  content: '';
+  margin-top: 2rem;
+  opacity: 1;
+}
+
+.slider-controller span:hover span {
+  width: 100%;
+  transition: width 0.3s ease;
+}
+
+.slider-controller span.active,
+.slider-controller span:hover {
+  /* opacity: 1; */
+}
+
+/* Search COntainer Desktop */
+
+.search-menu-bar {
+  transform: translateY(-100%);
+}
+
+.home-search {
+  border: 2px solid white;
+  justify-content: space-between;
+  background-color: none;
+}
+
+.home-search select {
+  padding: 25px;
+}
+
+.home-search input {
+  background-color: unset;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+.home-search input::placeholder {
+  color: white;
+  opacity: 0.5;
+}
+
+.home-search input[type='submit'] {
+  background-color: white;
+  color: var(--mainColor);
+}
+
+a.post-container {
   width: 30%;
 }
 
@@ -297,11 +552,11 @@ article.post-container {
   width: 100%;
 }
 
-.post-grid-scroll-container article {
+.post-grid-scroll-container a {
   width: 300px;
 }
 
-.post-grid-scroll-container article:first-child {
+.post-grid-scroll-container a:first-child {
   margin-left: 0;
 }
 /* Cat Desktop */
@@ -390,7 +645,187 @@ article.post-container {
   font-size: 13px;
 }
 
+/* Learn */
+
+/* How to videos */
+
+.featured-video-5-container {
+  border-bottom: 2px solid var(--darkpink);
+}
+
+.featured-template-5-video {
+  height: 450px;
+  width: 100%;
+}
+
+.template-5-videos > div {
+  height: 300px;
+  width: 30%;
+}
+
 /* Template Content Desktop */
+
+.learn-kickoff h1 span {
+  /* color: var(--mainColor); */
+}
+
+.learn-kickoff h1 span:first-child {
+  color: #ffd588;
+}
+
+.learn-cats > div:first-child .absolute-cover.bg-color {
+  /* background-color: #ffd588; */
+}
+
+.learn-kickoff h1 span:nth-child(2) {
+  color: #faa2a2;
+}
+
+.learn-kickoff h1 span:nth-child(3) {
+  color: #a5ba9b;
+}
+
+.learn-cats > div,
+.learn-cats > div > div {
+  height: 65vh;
+}
+
+.learn-cats .absolute-cover.bg-color {
+  opacity: 0.8;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.cover-cat:hover h2 {
+  color: #fff;
+}
+
+.cover-cat:hover .bg-color {
+  opacity: 0;
+}
+
+/* Recipes */
+
+.marco-carrousel > div:first-child {
+  transition: left 0.3s ease;
+  left: -86vw;
+}
+
+.carrousel-image {
+  width: 85vw;
+  height: 50vh;
+  border-radius: 2px;
+}
+
+.search-box-container select,
+.sub-list-select {
+  border: 2px solid black;
+  /* -webkit-appearance: none; */
+  outline: 0;
+  border-radius: 0px;
+  position: relative;
+}
+
+.search-box-container select::after {
+  position: absolute;
+  content: 'p';
+}
+
+.search-box-container form,
+.search-min-container {
+  border: 2px solid var(--mainColor);
+  justify-content: space-between;
+  /* padding: 25px; */
+}
+
+.search-text,
+.search-box-container select,
+.sub-list-select {
+  padding: 25px;
+}
+
+.sub-list-select {
+  font-family: var(--mainFont);
+  font-size: 1.5em;
+  text-transform: uppercase;
+}
+
+.search-box-container input {
+  appearance: none;
+  border: 0px;
+  outline: 0px;
+}
+
+.search-min-container input[type='submit'] {
+  -webkit-appearance: none;
+  background-color: unset !important;
+  border: 0px;
+  border-radius: 0px;
+  outline: none;
+  background-image: url('/wp-content/uploads/2021/08/Group-5.svg');
+  background-position: center center;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.search-min-container input[type='text'] {
+  border: 0px;
+  outline: none;
+}
+
+/* Recipes Single Desktop */
+
+.recipe-index {
+  border: 1px solid black;
+}
+
+.ideal-for {
+  border: 1px solid black;
+}
+
+.ideal-for > div:not(:first-child) {
+  border-left: 1px solid black;
+}
+
+.ideal-for img {
+  max-height: 80px;
+}
+
+/* Post Cover Sticky */
+
+.post-category-cover {
+  height: 100vh;
+}
+
+.post-content.categorized a.post-container,
+.recipes-archive-container a.post-container {
+  width: 45%;
+}
+
+.post-content.categorized a.post-container:nth-child(odd) article,
+.recipes-archive-container a.post-container:nth-child(odd) article {
+  margin-left: 0;
+}
+
+.post-content.categorized a.post-container:first-child,
+.post-content.categorized a.post-container:nth-child(2) {
+  margin-top: 0;
+}
+
+.post-content-cover * {
+  color: white;
+}
+
+/* Single Cat Recipe Page */
+
+.sub-categories-list a {
+  text-transform: uppercase;
+  font-family: var(--mainFont);
+  font-size: 1.5em;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
 
 /* Grid  */
 .grid-container div:nth-child(even) {

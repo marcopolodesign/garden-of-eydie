@@ -53,6 +53,7 @@ if ( ! function_exists( 'garden_of_eydie_setup' ) ) :
 				'menu-1' => esc_html__( 'Left Header', 'garden-of-eydie' ),
 				'menu-2' => esc_html__( 'Right Header', 'garden-of-eydie' ),
 				'menu-3' => esc_html__( 'Footer', 'garden-of-eydie' ),
+				'menu-4' => esc_html__( 'Side Menu', 'garden-of-eydie' ),
 			)
 		);
 

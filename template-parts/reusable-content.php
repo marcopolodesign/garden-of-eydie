@@ -1,10 +1,10 @@
 <?php if( have_rows('reusable_content') ): while ( have_rows('reusable_content') ) : the_row(); 
 
-if( get_row_layout() == 'grid' ):  ?>
+  if( get_row_layout() == 'grid' ):  ?> 
 
-<div class="flex column-mobile justify-center items-stretch comm-footer grid-container">
+    <div class="flex column-mobile justify-center items-stretch comm-footer grid-container">
 
-<?php while ( have_rows('grid_item') ) : the_row(); 
+    <?php while ( have_rows('grid_item') ) : the_row(); 
       $icon = get_sub_field('icon'); 
       if (!$icon) : $icon = '/wp-content/uploads/2021/07/Group.svg'; endif;
       
@@ -26,7 +26,7 @@ if( get_row_layout() == 'grid' ):  ?>
 
       <?php endwhile; ?>
 
-      </div>
+    </div>
 
 
 
@@ -51,9 +51,45 @@ if( get_row_layout() == 'grid' ):  ?>
           else :
             get_template_part( 'template-parts/content', 'none' );
           endif; wp_reset_postdata(); ?>
-        </div>
+      </div>
 
     </div>
+
+    <?php elseif (get_row_layout() == 'post_grid_fixed'): 
+        $color = get_sub_field('bg_color');
+        $image= get_sub_field('background_image');
+        $cat = get_sub_field('post_category_id');
+        $reverse = get_sub_field('reverse');
+        if ($reverse): $reverse = "row-reverse"; endif; 
+        if ($cat): 
+      ?>
+          <div class="post-content categorized mv6 flex column-mobile justify-between <?php echo $reverse; ?>">
+            <div class="sticky w-40-ns post-category-cover flex top-0">
+                <div class="m-auto tc z-2 relative white post-content-cover">
+                  <?php the_sub_field('category_info');?>
+                </div>
+                <div class="absolute-cover" style="background-image: url(<?php echo $image; ?>); background-color: <?php echo $color; ?>"></div>
+            </div>
+
+            <div class="flex flex-wrap post-grid-container w-50-ns m-auto">
+              <?php 
+                $postGrid = array(
+                    'post_type' => 'post',
+                    'posts_per_page' => 8,
+                    'order'=> 'DESC',
+                    'cat' => $cat,
+                );
+                $post_query = new WP_Query($postGrid);
+                if($post_query->have_posts() ) : while($post_query->have_posts() ) :
+                  $post_query->the_post(); 
+                  get_template_part( 'template-parts/post-query', get_post_type() );
+                endwhile; 
+                else :
+                  get_template_part( 'template-parts/content', 'none' );
+                endif; wp_reset_postdata(); ?>
+            </div>
+          </div>
+          <?php endif; ?>
 
 
   <?php elseif (get_row_layout() == 'image_form'): ?>
@@ -145,6 +181,41 @@ if( get_row_layout() == 'grid' ):  ?>
 
         </div>
 
+      <?php elseif (get_row_layout() == 'covers'): ?>
+      <div class="flex items-stretch learn-cats mt5 container ">
+          <?php while ( have_rows('categories') ) : the_row();?>
+        <div class="relative mh3 w-30-ns cover-cat">
+            <div class="pa5 flex flex-column jic relative z-4">
+              <h1 class="tc ttu f0"><?php the_sub_field('title');?></h1>
+              <h2 class="tc"><?php the_sub_field('description');?></h2>
+            </div>
+            <div class="absolute-cover bg-color z-3" style="background-color: <?php the_sub_field('bg_color');?>"></div>
+          <div class="absolute-cover" style="background-image: url(<?php the_sub_field('cover'); ?>); z-index: -1"></div>
+        </div>
+      <?php endwhile;?>
+      </div>
+
+
+
+      <?php elseif (get_row_layout() == 'featured_video'): ?>
+
+        <div class="container flex justify-between items-center mv5">
+          <div class="flex flex-column">
+            <h2 class="post-content-title pa3 f2 white w-max " style="background-color: <?php the_sub_field('title_background');?> ; color: <?php the_sub_field('title_color');?>"><?php the_sub_field('title');?></h2>
+            <!-- <p class="grey mt3 measure lh1"><?php echo get_sub_field('explanatory_text');?></p> -->
+          </div>
+          
+          <a class="f2 main-font has-after anchor">VIEW ALL</a>
+        </div>
+
+        <div class="container featured-video-5-container center">
+        <div class="featured-template-5-video">
+            <div class="new-home-video w-100 h-100 flex">
+              <iframe width="100%" src="<?php the_sub_field('featured_video');?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+
 
   <?php elseif (get_row_layout() == 'image_form'): ?>
             <div class="community-cta flex column-mobile container items-center">
@@ -182,6 +253,33 @@ if( get_row_layout() == 'grid' ):  ?>
 
     </div>
 
+  <?php elseif (get_row_layout() == 'images_text_grid'): ?>
+    <div class="container relative pv5">
+      <div class="flex jic z-1">
+        <div class="image-1 w-30-ns mb7-ns">
+          <img src=<?php the_sub_field('first_image');?>> 
+        </div>
+        <div class="image-2 w-40-ns mt6-ns tty50 ">
+          <img src=<?php the_sub_field('second_image');?>> 
+        </div>
+      </div>
 
+      <div class="absolute-center z-4 w-70-ns">
+        <h3 class='tc page-title-small ttu' style="color:<?php the_sub_field('color');?>"><?php the_sub_field('title');?></h3>
+        <h1 class="f1 tc mv3 main-font lh1 ttu" style="color:<?php the_sub_field('color');?>"><?php echo get_sub_field('text');?></h1>
+
+        <?php $link = get_sub_field('link');
+        if ($link):
+          $link_target =  $link['target'] ? $link['target'] : '_self'; ?>
+          <a target=<?php echo esc_attr( $link_target ); ?> href=<?php echo esc_url($link['url']) ;?> class="db f5 fw6 mt4 mb4 no-deco white w-max pa3 center"  style="background-color: black"><?php echo esc_attr($link['title']) ;?></a>
+        <?php endif;?>
+
+      </div>
+    <div class="absolute-cover bg-main-color multiply" style="background-color: <?php the_sub_field('bg_color');?>"></div>
+
+
+
+
+    </div>
 
 <?php endif; endwhile; endif; ?>

@@ -1,4 +1,3 @@
-console.log('start travel!');
 let pageName = document.querySelector('[data-barba=container]');
 let preLoad = document.querySelectorAll('.pre-load');
 let header = document.querySelector('header')
@@ -11,91 +10,25 @@ let allAnchors;
 
 const runScripts = () => {
   pageName = document.querySelector('[data-barba=container]');
-  console.log(pageName);
+  // console.log(pageName);
   docuHeight = document.body.clientHeight;
 
-  function allCursor() {
-    let cursor = document.querySelector('.cursor');
-    allAnchors = Array.prototype.slice.call(document.querySelectorAll('a, .anchor'));
-    let extraAnchors = Array.prototype.slice.call(document.querySelectorAll('.anchor'));
-    buttons = Array.prototype.slice.call(document.querySelectorAll('button'));
 
-    anchors = allAnchors.concat(extraAnchors);
-    anchors = allAnchors.concat(buttons);
-
-    let anchorContainer = document.querySelectorAll('.main-cta');
-
-    const changeCursorColor = () => {
-      anchorContainer.forEach((container) => {
-        const color = container.getAttribute('cursor-color');
-
-        if (color === 'red') {
-          cursor.classList.remove('black');
-          cursor.classList.add('red');
-        } else if (color === 'black') {
-          cursor.classList.remove('red');
-          cursor.classList.add('black');
-        }
-      });
-    };
-
-    const hoverCursor = () => {
-      cursor.classList.add('is-hover');
-    };
-
-    const removeHoverCursor = () => {
-      cursor.classList.remove('is-hover');
-      cursor.classList.remove('is-shop');
-      cursor.classList.remove('add-cart');
-    };
-
-    anchors.forEach((anchor) => {
-      anchor.addEventListener('mouseover', () => {
-        if (anchor.classList.contains('is-shoppable')) {
-          cursor.classList.add('is-shop');
-        } else if (anchor.classList.contains('single_add_to_cart_button')) {
-          cursor.classList.add('add-cart');
-        } else {
-          hoverCursor();
-        }
-      });
-    });
-
-    anchors.forEach((anchor) => {
-      anchor.addEventListener('mouseleave', () => {
-        removeHoverCursor();
-      });
-    });
-
-    const moveCursor = (x, y) => {
-      cursor.style.top = y + 'px';
-      cursor.style.left = x + 'px';
-      changeCursorColor();
-    };
-
-    document.addEventListener('mousemove', (event) => {
-      // moveCursor(event.pageX, event.pageY);
-    });
-
-    document.addEventListener('scroll', (event) => {
-      moveCursor(event.pageX, event.pageY);
-    });
-  }
 
   const headerColor = () => {
       let hasBackground = document.querySelector('#main.no-mt');
 
         if (!hasBackground) {
             header.classList.add('bg-white')
-            console.log('no-bg')
 
         } else {
           header.classList.remove('bg-white')
-          console.log('has-bg')
         }
 
         document.addEventListener('scroll' , () => {
           header.classList.add('bg-white');
+          header.classList.add('scrolled')
+
         })
 
   }
@@ -131,22 +64,6 @@ const runScripts = () => {
       duration: 1500,
       // loop: true,
     });
-  };
-
-  const scrollTo = (array, target) => {
-    let n;
-    if (array.length > 0) {
-      array.forEach((i) => {
-        i.addEventListener('click', (e) => {
-          n = array.indexOf(e.target);
-
-          window.scrollTo({
-            top: target[n].offsetTop - 150,
-            behavior: 'smooth',
-          });
-        });
-      });
-    }
   };
 
   const faq = () => {
@@ -245,7 +162,7 @@ const runScripts = () => {
   initScripts();
   // fbTrack();
   // googleAnalytics();
-  allCursor();
+  // allCursor();
 
   // changeFooter();
 };
@@ -418,7 +335,242 @@ const instagram = () => {
 
 instagram();
 
-// Para páginas individuales de grados
+const search = () => {
+  let searchContainer = document.querySelector('.search-menu-container')
+  let searchTrigger = document.querySelector('.search-trigger');
+  let closeSearch = document.querySelector('.close-search');
+  let searchBar = document.querySelector('.search-menu-bar');
+
+  let searchTL = gsap.timeline({
+    paused: true, 
+    defaults: { 
+      easing: Power4.easeInOut, 
+      duration: .3,
+    },
+  });
+  searchTL
+  .to(searchBar, {y: 0})
+  .to(closeSearch, {opacity: .9}, .2)
+
+  searchTrigger.addEventListener('click', ()=> {
+    searchTL.play();
+    searchContainer.classList.remove('pointers-none');
+  }) 
+
+  closeSearch.addEventListener('click', ()=> {
+    searchTL.reverse();
+    searchContainer.classList.add('pointers-none');
+
+  })
+}
+
+search();
+
+const carrousel = () => {
+  let slider = document.querySelector('.marco-carrousel > div');
+  let controllers = Array.prototype.slice.call(document.querySelectorAll('.dot'));
+
+  controllers.forEach((c,i) => {
+    c.addEventListener('click', ()=> {
+      slider.style.transitionDelay = "0s !important"
+      controllers.forEach(c => {
+        c.classList.remove('active')
+      });
+      c.classList.add('active');
+     if (i < 0) {
+       slider.style.left = "80vw"
+     } else {
+       slider.style.left = i * -86 + "vw";
+     }
+    })
+  })
+}
+
+const scrollTo = (array, target) => {
+  let n;
+  if (array.length > 0) {
+    array.forEach((i) => {
+      i.addEventListener('click', (e) => {
+        n = array.indexOf(e.target);
+
+        console.log(target[n].offsetTop)
+        window.scrollTo({
+          top: target[n].getBoundingClientRect().top + window.scrollY - 150,
+          behavior: 'smooth',
+        });
+      });
+    });
+  }
+};
+
+let menu = document.querySelector('.menu-container')
+let menuContent = document.querySelector('#side-menu');
+let linkContainer = document.querySelectorAll('ul.menu-nav > li')
+let menuLinks = document.querySelectorAll('ul.menu-nav > li > a')
+let menuBg = menu.querySelector('.absolute-cover.bg-main-color')
+
+
+let delay = 8;
+let duration = .4
+let transition = Power4.easeInOut;
+
+
+let menuTL = gsap.timeline({
+  paused: true
+});
+menuTL
+.to (menuBg, {scaleX: "100%", duration: duration , transition: transition}).to(menuLinks, {y: 0, stagger: 0.05}, .2)
+.to(linkContainer, {y: 0, stagger: 0.05}, .4)
+
+
+const openMenu = () => {
+  let trigger = document.querySelector('.menu-trigger');
+
+
+  trigger.addEventListener('click', ()=> {
+    menu.classList.remove('o-0');
+    menu.classList.remove('pointers-none');
+
+    menuTL.play();
+
+  })
+
+ 
+}
+
+
+const closeMnenu = () => {
+  let trigger = document.querySelector('.close-menu');
+
+  trigger.addEventListener('click', ()=> {
+    menuTL.reverse();
+    setTimeout(() => {
+      menu.classList.add('o-0');
+      menu.classList.add('pointers-none');
+    }, 1200);
+   
+  })
+}
+
+closeMnenu();
+openMenu();
+
+const moveSlides = () => {
+  let slides = document.querySelectorAll('.home-slider .slide');
+  let text = gsap.utils.toArray('.slide-text');
+  let slideImage = gsap.utils.toArray('.slide-img');
+  let slideColor = gsap.utils.toArray('.s-bg-color');
+  let background = gsap.utils.toArray('.s-bg-img>div');
+
+
+  let delay = 8;
+  let duration = .6
+  let transition = Power4.easeInOut;
+
+
+  let animateFirstSlide = () => {
+    let header = document.querySelector('header')
+
+    // CustomEase.create("cubic", "0.77, 0, 0.175, 1")
+
+    generalTl = gsap.timeline({ 
+      defaults: {
+        ease: Power4.easeInOut,
+          duration: .8
+      }
+  
+    }) 
+    generalTl
+    .set(header, {y: '-100%'})
+    .set(slideImage[0], {opacity: 1,y: "150%"})
+    .call(()=> {
+      slideColor[0].classList.add('is-open');
+      background[0].classList.add('is-open');
+    })
+    .to (header, {y :0, duration: 0.6, delay: .3, ease: Power2.easeOut})
+    // .to(background[0], {clipPath: "inset(0)", duration: duration}, 0)
+    // .to(slideColor[0], {width: "100%"}, 0.3)
+    .to(text[0], {opacity: 1,}, 0.3)  
+    .to(slideImage[0], {opacity: 1, y: '-0%'}, .9)
+    
+  }
+
+  animateFirstSlide();
+
+  const animateSlides = () => {
+    const TextTL = gsap.timeline({ repeat: -1});
+    text.forEach((c, i) => {
+      TextTL
+      .to(c, { opacity: 1, duration: duration, ease: transition })
+      .to(c, { opacity: 0, duration: duration, delay: delay})
+    });
+
+    const imageTL = gsap.timeline({ repeat: -1});
+    slideImage.forEach((c, i) => {
+      imageTL
+      .set(c, { opacity: 1, y: "150%"})
+      .to(c, { opacity: 1,  y: "0%", duration: duration, ease: transition })
+      .to(c, { opacity: 1, y: "-150%", duration: duration, delay: delay })
+    });
+  
+  
+  const colorTL = gsap.timeline({ repeat: -1});
+    slideColor.forEach((c, i) => {
+      colorTL
+      .to(c, { opacity: 1, duration: duration, ease: transition })
+      .to(c, { duration: duration , delay: delay })
+    });
+
+    const backgroundTL = gsap.timeline({ repeat: -1});
+    background.forEach((c, i) => {
+      backgroundTL
+      .set (c, {clipPath: "inset(0px 0px 0px 100%)"})
+      .to(c, { clipPath: "inset(0)", duration: duration, ease: transition })
+      .to(c, { duration: duration, delay: delay })
+    });
+
+   
+    const controllers = gsap.utils.toArray('.slider-controller span span');
+
+    const controllersTL = gsap.timeline ({repeat: -1})
+      controllers.forEach((c, i)=> {
+        controllersTL
+          .set ( c, {width: "0%", scaleY: "100%"})
+          .to (c, {width: "100%", duration: (duration + delay), ease: Power0.easeNone})
+          .to ( c, {scaleY: "0%", duration: duration, ease: transition})
+
+      })
+
+
+  const resetSlides = () => {
+    dots.forEach(d=> {
+        d.style.backgroundColor = "#000"
+    });
+
+    boxes.forEach(b => {
+        b.style.zIndex = "1";
+    })
+
+    wallpapers.forEach((w,i) => {
+        // w.style.zIndex = "1"
+
+       if (
+        //    i == activeSlide -1 ||
+         i == activeSlide ) {
+           w.style.clipPath = 'inset(100% 0 0 0)'
+       } else {
+        //    w.style.zIndex = '0'
+       }
+    })
+}
+
+  }
+
+  animateSlides()
+  
+}
+
+
 
 
 barba.init({
@@ -480,15 +632,30 @@ barba.init({
     {
       namespace: 'home',
       afterEnter(data) {
+        moveSlides();
       },
     },
 
+    {
+      namespace: 'recipes', 
+      afterEnter (data) {
+        carrousel();
+      }
+    },  {
+      namespace: 'recipe', 
+      afterEnter(data) {
+        let index = Array.prototype.slice.call(document.querySelectorAll('.recipe-index h2'));
+        let sections = Array.prototype.slice.call(document.querySelectorAll('.recipe-section .mission h1'));
+        scrollTo(index, sections);
+      }
+    },
     {
       namespace: 'lifestyle', 
       afterEnter (data) {
         lifestyle();
       }
     }
+
   ],
   debug: true,
 });
