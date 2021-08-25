@@ -16,6 +16,9 @@
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.2/TweenMax.min.js"></script>
+
+	<script src="/includes/CustomEase.js"></script>
 
 	<?php wp_head(); ?>
 </head>
@@ -43,12 +46,17 @@
 		</a>
 
 		<div class="right-header flex jic">
-			<div class="flex items-center">
+			<div class="flex items-center search-trigger pointer">
 				<p class="mr2">Search</p>
 				<?php get_template_part('template-parts/content/search');?>
 			</div>
 
-			<p class="mh4">Menu</p>
+		<div class="menu-trigger pointer flex flex-column">
+			<span></span>
+			<span></span>
+			<span></span>
+		</div>
+
 			
 			<div class="header-social flex items-center">
 				<?php if( have_rows('header_social', 341) ): while( have_rows('header_social', 341) ): the_row(); 	
@@ -74,6 +82,12 @@
 			</div>
 		</div>
 	</header><!-- #masthead -->
+
+
+	<?php 
+	get_template_part('template-parts/menu'); 
+get_template_part('template-parts/search');
+	?>
 
 
 	<!-- <div class="cursor desktop"></div> -->

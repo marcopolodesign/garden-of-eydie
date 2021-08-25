@@ -530,10 +530,20 @@ p.lh1 {
   margin-left: 20px;
 }
 
+.has-hover-items:hover a {
+  opacity: 0.3;
+}
+
+.has-hover-items a:hover {
+  opacity: 1;
+}
+
 .has-after,
 .header-nav a,
 .footer-nav-inner a,
-.details-header > p {
+.details-header > p,
+.side-menu a,
+.sub-categories-list a {
   text-decoration: none;
   display: block;
   position: relative;
@@ -553,7 +563,9 @@ p.lh1 {
 .has-after::after,
 .header-nav a::after,
 .footer-nav-inner a::after,
-.details-header > p::after {
+.details-header > p::after,
+.side-menu a::after,
+.sub-categories-list a::after {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -572,11 +584,13 @@ p.lh1 {
   /* height: 1px; */
 }
 
-.grey.has-after {
+.grey.has-after,
+.sub-categories-list a {
   color: var(--grey);
 }
 
-.grey.has-after:hover {
+.grey.has-after:hover,
+.sub-categories-list a:hover {
   color: #000;
 }
 
@@ -618,7 +632,9 @@ p.lh1 {
 .header-nav a:hover::after,
 .footer-nav-inner a:hover::after,
 .details-header > p.selected::after,
-.shop-artist:hover .has-after::after {
+.shop-artist:hover .has-after::after,
+.side-menu a:hover::after,
+.sub-categories-list a:hover::after {
   transform: scaleX(1);
 }
 

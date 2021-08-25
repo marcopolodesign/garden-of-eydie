@@ -5,7 +5,7 @@ $moreSpacing = get_field('mt_true');
 
 <main id="main" data-barba="container" data-barba-namespace="home" class="home no-mt" bg-color="white">
 
-<section class="home-slider-container relative w-100 min-h-100">
+<section class="home-slider-container relative w-100 min-h-100-vh">
 
   
   <?php 
@@ -13,15 +13,20 @@ $moreSpacing = get_field('mt_true');
     $amount = count($slider);
   if(have_rows('slider')): while ( have_rows('slider') ) : the_row(); ?>
 
-  <div class="slide absolute top-0 left-0 h-100 w-100 flex ">
+  <div class="slide absolute top-0 left-0 h-100 w-100 flex overflow-hidden">
     <div class="slide-text relative z-3 measure-wide container-left h-max ml-0 m-auto">
-      <h1 class="main-font f0"><?php the_sub_field('title');?></h1>
-      <h3 class="mt3 fw3 pl2"><?php the_sub_field('description');?></h3>
+      <div class="overflow-hidden">
+        <h1 class="main-font f0 ttu" style="color: <?php the_sub_field('main_color');?>"><?php the_sub_field('title');?></h1>
+      </div>
+    
+      <h3 class="mt3 fw3 pl2"  style="color: <?php the_sub_field('main_color');?>">
+      <?php the_sub_field('description');?>
+      </h3>
 
       <?php $link = get_sub_field('link');
         if ($link):
           $link_target =  $link['target'] ? $link['target'] : '_self'; ?>
-          <a target=<?php echo esc_attr( $link_target ); ?> href=<?php echo esc_url($link['url']) ;?> class="db f5 fw6 mt4 mb4 no-deco white w-max pa3" style="background-color: black"><?php echo esc_attr($link['title']) ;?></a>
+          <a target=<?php echo esc_attr( $link_target ); ?> href=<?php echo esc_url($link['url']) ;?> class="bg-black db f5 fw6 mt4 mb4 no-deco white w-max pa3" style="background-color: <?php the_sub_field('main_color');?>"><?php echo esc_attr($link['title']) ;?></a>
         <?php endif;?>
     </div>
 
@@ -29,8 +34,10 @@ $moreSpacing = get_field('mt_true');
       <img src=<?php the_sub_field('image');?>>
     </div>
     <div class="slide-bg flex absolute w-100 h-100">
-        <div class="w-70" style="background-color: <?php the_sub_field('background_color');?>"></div>
-        <div class="w-30 relative">
+        <div class="w-70-ns relative" >
+            <div class="absolute-cover s-bg-color" style="background-color: <?php the_sub_field('background_color');?>"></div>  
+        </div>
+        <div class="w-30-ns relative s-bg-img overflow-hidden">
           <div class="absolute-cover" style="background-image: url( <?php the_sub_field('background_image');?>)"></div>
         </div>
     </div>
@@ -40,7 +47,9 @@ $moreSpacing = get_field('mt_true');
 
   <div class="absolute z-4 container slider-controller flex">
     <?php for($i = 0; $i < $amount; $i++) : ?>
-      <span class="db mr3 pv4 relative"></span>
+      <span class="db mr3 pv4 relative">
+        <span></span>
+      </span>
     <?php endfor;?>
   </div>
 </section>
