@@ -1,4 +1,4 @@
-<a class="no-deco black mr3 db post-container" href=<?php the_permalink(); ?>>
+<a class="no-deco black mr3 db post-container w-100-m" href=<?php the_permalink(); ?>>
 <article id="post-<?php the_ID(); ?>" <?php post_class(' ma3-ns'); ?>>
 	<div class="relative post-img">
 		<?php get_template_part('template-parts/thumbnail-bg');?>

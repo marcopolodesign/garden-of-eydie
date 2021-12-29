@@ -27,7 +27,7 @@
 <?php wp_body_open(); ?>
 <div id="page" class="site">
 
-	<header id="masthead" class="site-header flex jic fixed top-0 left-0 w-100 pv3 ph5 bg-white">
+	<header id="masthead" class="site-header flex jic fixed top-0 left-0 w-100 pv3 ph5 bg-white no-print">
 		<div class="left-header">
 			<nav>
 				<?php
@@ -39,6 +39,7 @@
 					) );
 					?>
 				</nav>
+				<div class="absolute top-0 left-0 w-100 min-h-100-vh o-0 pointers-none sub-menu-bg"></div>
 		</div>
 
 		<a href="/">
@@ -63,7 +64,7 @@
 				$network = get_sub_field('icon');
 				?>
 
-				<a href=<?php the_sub_field('link');?> class="mh3">
+				<a href=<?php the_sub_field('link');?> class="mh2 flex">
 				<?php
 
 					if ($network == "Pinterest"): 

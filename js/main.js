@@ -15,6 +15,30 @@ const runScripts = () => {
 
 
 
+  const animatePosts = () => {
+
+    let posts = document.querySelectorAll('.recommended-content li');
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.intersectionRatio >= 0.13) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      },
+      {
+        threshold: [0, 0.2, 1],
+      }
+    );
+
+    posts.forEach((post) => {
+      observer.observe(post);
+    });
+  }
+
+  animatePosts();
+
   const headerColor = () => {
       let hasBackground = document.querySelector('#main.no-mt');
 
@@ -28,7 +52,6 @@ const runScripts = () => {
         document.addEventListener('scroll' , () => {
           header.classList.add('bg-white');
           header.classList.add('scrolled')
-
         })
 
   }
@@ -76,6 +99,7 @@ const runScripts = () => {
         q.addEventListener('click', (e)=> {
           console.log(isExpanded)
           let answer = q.querySelector('.faq-answer');
+          let answerContent = answer.querySelector('p');
           let arrow = q.querySelector('svg');
   
           let height = answer.querySelector('p').clientHeight ;   
@@ -91,8 +115,10 @@ const runScripts = () => {
           if (!isExpanded) {
             faq
             // .to(arrow, {transform: 'rotate(-90deg)'})
-            .to (answer, { opacity: 0})
+            .to (answer, { opacity: 0})  
+            .to (answerContent, {marginTop: '0px', marginBottom: "0px"}, 0)
             .to (answer, {maxHeight: "0", opacity: 0}, 0.15)
+          
               console.log('reverse')
               isExpanded = true;  
           } else {
@@ -100,6 +126,7 @@ const runScripts = () => {
             // .to(arrow, {transform: 'rotate(0deg)'})
             .to (answer, {maxHeight: height})
             .to (answer, { opacity: 1}, 0.3)
+            .to (answerContent, {marginTop: '10px', marginBottom: "10px"}, 0.3)
             isExpanded = false;  
           }          
         })
@@ -264,7 +291,7 @@ const lifestyle = () => {
 const instagram = () => {
   let fields = 'id,username, media_type, media_url, timestamp, permalink, comments'
 
-  const accessToken = 'IGQVJYRUV6SVFpazJpNHlBS3QxaEZAFcExLNTVTRXRuWTEyeFZANLXpVQ1NmSDQ5LWpzMGNXbWlnVUdDVFUzS1FzNmZAfbHVJUF8teGc0QlNkZAXVmQVdVZAUs1WGNvYTZAENHFGNWt0RzdVdWZAqckxZAb0pWYgZDZD';
+  const accessToken = 'IGQVJVV2haaUV3dHJLV3FEVXRIa2VTRTZAVMWtpblp5RnlmLTFLam1KX1dQQ01raUw2a251QVprSWJybmw4b3d0b2taMG0zUzZAIZA0puOXVjaUFzaEpmWk1ydFB3b2I0VU4wang5THNMaVBqLTZA6cUhubAZDZD';
 
 
   const superHiApi = `https://api.superhi.com/api/test/token/instagram?access_token=${accessToken}`
@@ -378,9 +405,9 @@ const carrousel = () => {
       });
       c.classList.add('active');
      if (i < 0) {
-       slider.style.left = "80vw"
+       slider.style.left = "85vw"
      } else {
-       slider.style.left = i * -86 + "vw";
+       slider.style.left = i * -85 + "vw";
      }
     })
   })
@@ -419,14 +446,12 @@ let menuTL = gsap.timeline({
   paused: true
 });
 menuTL
-.to (menuBg, {scaleX: "100%", duration: duration , transition: transition}).to(menuLinks, {y: 0, stagger: 0.05}, .2)
+.to (menuBg, {scale: 1, force3D: false, duration: duration , transition: transition}).to(menuLinks, {y: 0, stagger: 0.05}, .2)
 .to(linkContainer, {y: 0, stagger: 0.05}, .4)
 
 
 const openMenu = () => {
   let trigger = document.querySelector('.menu-trigger');
-
-
   trigger.addEventListener('click', ()=> {
     menu.classList.remove('o-0');
     menu.classList.remove('pointers-none');
@@ -435,11 +460,23 @@ const openMenu = () => {
 
   })
 
+  let subMenuTrigger = document.querySelector('.slide-sub-menu > a');
+  let subMenu = document.querySelector('.slide-sub-menu ul')
+  let background = document.querySelector('.sub-menu-bg');
+
+  subMenuTrigger.addEventListener('mouseover', ()=> {
+    background.classList.add('active');
+  })
+
+  subMenu.addEventListener('mouseleave', ()=> {
+    background.classList.remove('active');
+  })
+
  
 }
 
 
-const closeMnenu = () => {
+const closeMenu = () => {
   let trigger = document.querySelector('.close-menu');
 
   trigger.addEventListener('click', ()=> {
@@ -452,7 +489,7 @@ const closeMnenu = () => {
   })
 }
 
-closeMnenu();
+closeMenu();
 openMenu();
 
 const moveSlides = () => {
@@ -461,6 +498,9 @@ const moveSlides = () => {
   let slideImage = gsap.utils.toArray('.slide-img');
   let slideColor = gsap.utils.toArray('.s-bg-color');
   let background = gsap.utils.toArray('.s-bg-img>div');
+  const controllers = gsap.utils.toArray('.slider-controller span span');
+
+  let cta = gsap.utils.toArray('.slide-text');
 
 
   let delay = 8;
@@ -480,48 +520,82 @@ const moveSlides = () => {
       }
   
     }) 
-    generalTl
-    .set(header, {y: '-100%'})
-    .set(slideImage[0], {opacity: 1,y: "150%"})
-    .call(()=> {
-      slideColor[0].classList.add('is-open');
-      background[0].classList.add('is-open');
-    })
-    .to (header, {y :0, duration: 0.6, delay: .3, ease: Power2.easeOut})
-    // .to(background[0], {clipPath: "inset(0)", duration: duration}, 0)
-    // .to(slideColor[0], {width: "100%"}, 0.3)
-    .to(text[0], {opacity: 1,}, 0.3)  
-    .to(slideImage[0], {opacity: 1, y: '-0%'}, .9)
+
+    if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) { 
+      generalTl
+      .set(header, {y: '-100%'})
+      .set(cta[0], {PointerEvent: 'all', duration: 0},)
+      .set(slideImage[0], {opacity: 1,y: "150%"})
+      .call(()=> {
+        slideColor[0].classList.add('is-open');
+        background[0].classList.add('is-open');
+      })
+      .to (header, {y :0, duration: 0.6, delay: .3, ease: Power2.easeOut})
+      .to(text[0], {opacity: 1,}, 0.3)  
+      .to(slideImage[0], {opacity: 1, transform: 'translate(-36%, -50%'}, .9)
+    }  else {
+      generalTl
+      .set(header, {y: '-100%'})
+      .set(cta[0], {pointerEvents: 'all', duration: 0})
+      .set(slideImage[0], {opacity: 1,y: "150%"})
+      .call(()=> {
+        slideColor[0].classList.add('is-open');
+        background[0].classList.add('is-open');
+      })
+      .to (header, {y :0, duration: 0.6, delay: .3, ease: Power2.easeOut})
+      .to(text[0], {opacity: 1,}, 0.3)  
+      .to(slideImage[0], {opacity: 1, transform: 'translate(-50%, 0%)'}, .9)
+    
+    }
+
     
   }
 
   animateFirstSlide();
 
+  const TextTL = gsap.timeline({ repeat: -1});
+  const ctaTL = gsap.timeline({repeat: -1});
+  const imageTL = gsap.timeline({ repeat: -1});
+  const colorTL = gsap.timeline({ repeat: -1});
+  const backgroundTL = gsap.timeline({ repeat: -1});
+  const controllersTL = gsap.timeline ({repeat: -1})
+
+
   const animateSlides = () => {
-    const TextTL = gsap.timeline({ repeat: -1});
     text.forEach((c, i) => {
       TextTL
       .to(c, { opacity: 1, duration: duration, ease: transition })
       .to(c, { opacity: 0, duration: duration, delay: delay})
     });
 
-    const imageTL = gsap.timeline({ repeat: -1});
+    cta.forEach((c, i) => {
+      ctaTL
+      .to(c, {pointerEvents: 'all', duration: duration})
+      .to(c, { duration: duration , delay: delay })
+
+    })
+
     slideImage.forEach((c, i) => {
+      if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) { 
       imageTL
-      .set(c, { opacity: 1, y: "150%"})
-      .to(c, { opacity: 1,  y: "0%", duration: duration, ease: transition })
-      .to(c, { opacity: 1, y: "-150%", duration: duration, delay: delay })
+      .set(c, { opacity: 1, transform: "translate(-36%, 150%)"})
+      .to(c, { opacity: 1,  transform: "translate(-36%, -50%)", duration: duration, ease: transition })
+      .to(c, { opacity: 1,  transform: "translate(-36%, -250%)", duration: duration, delay: delay }) } 
+      else {
+        imageTL
+        .set(c, { opacity: 1, transform: "translate(-130%, 0%)"})
+        .to(c, { opacity: 1,  transform: "translate(-50%, 0%)", duration: duration, ease: transition })
+        .to(c, { opacity: 1,  transform: "translate(136%, 0%)", duration: duration, delay: delay })  
+      }
     });
   
   
-  const colorTL = gsap.timeline({ repeat: -1});
     slideColor.forEach((c, i) => {
       colorTL
       .to(c, { opacity: 1, duration: duration, ease: transition })
       .to(c, { duration: duration , delay: delay })
     });
 
-    const backgroundTL = gsap.timeline({ repeat: -1});
     background.forEach((c, i) => {
       backgroundTL
       .set (c, {clipPath: "inset(0px 0px 0px 100%)"})
@@ -529,17 +603,13 @@ const moveSlides = () => {
       .to(c, { duration: duration, delay: delay })
     });
 
-   
-    const controllers = gsap.utils.toArray('.slider-controller span span');
-
-    const controllersTL = gsap.timeline ({repeat: -1})
-      controllers.forEach((c, i)=> {
+    controllers.forEach((c, i)=> {
         controllersTL
           .set ( c, {width: "0%", scaleY: "100%"})
           .to (c, {width: "100%", duration: (duration + delay), ease: Power0.easeNone})
           .to ( c, {scaleY: "0%", duration: duration, ease: transition})
 
-      })
+    })
 
 
   const resetSlides = () => {
@@ -562,12 +632,98 @@ const moveSlides = () => {
         //    w.style.zIndex = '0'
        }
     })
-}
+  }
 
   }
 
-  animateSlides()
+  const sliderText = () => {
+    let text = document.querySelectorAll('.slide-text h1');
+
+    text.forEach(t => {
+      let count = t.innerText.length
+
+      if (count > 30) {
+        t.style.fontSize = "4rem"
+      } else if (count > 45) {
+        t.style.fontSize = "3rem"
+      }
+
+    })
+  }
+
+  sliderText();
+  animateSlides();
+
+  const toSlide = () => {
+    let indicators = document.querySelectorAll('.slider-controller > span');
+
+
+    indicators.forEach((n,index) => {
+      n.addEventListener('click', () =>{
+      
+      indicators.forEach(i => {
+        i.querySelector('span').classList.add('not-active')
+      })
+      n.querySelector('span').style.width = "100% !important"
+      n.querySelector('span').classList.remove('not-active')
+
+        TextTL.pause()
+        ctaTL.pause()
+        imageTL.pause() 
+        colorTL.pause() 
+        backgroundTL.pause() 
+        controllersTL.pause();
+
+        let activeTimeline = gsap.timeline();
+        duration = "1"
+       
+        activeTimeline
+        .to(text, { opacity: 0, duration: duration, ease: transition },0)
+
+        .to(text[index], { opacity: 1, duration: duration, ease: transition },0)
+     
+        .to(cta, {pointerEvents: 'none', duration: duration},0)
+
+        .to(cta[index], {pointerEvents: 'all', duration: duration},0)
+
+        .to(slideColor, { opacity: 0, duration: duration, ease: transition },0)
+        .to(slideColor[index], { opacity: 1, duration: duration, ease: transition },0)
+    
+     
+        .to(background, {clipPath: "inset(0px 0px 0px 100%)"},0)
+        .to(background[index], { clipPath: "inset(0)", duration: duration, ease: transition },0)
+      
+
+        // .set ( controllers, {width: "0%", scaleY: "100%"},0)
+        // .to (controllers[index], {width: "100%", duration: (duration + delay), ease: Power0.easeNone},0)
+     
+   
   
+        if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) { 
+        activeTimeline
+        .to(slideImage, { opacity: 0, zIndex: 0, transform: "translate(-36%, 150%)"},0)
+        .to(slideImage[index], { opacity: 1,  zIndex: 5, transform: "translate(-36%, -50%)", duration: duration, ease: transition },0)
+        } else {
+          activeTimeline
+          .to(slideImage, { opacity: 0, zIndex: 0, transform: "translate(-130%, 0%)"},0)
+          .to(slideImage[index], { opacity: 1, zIndex: 5, transform: "translate(-50%, 0%)", duration: duration, ease: transition },0)
+        }
+      })
+    })
+  }
+  
+
+  
+
+  toSlide();
+}
+
+const recipeDropdown = () => {
+  let dropdown = document.querySelector('.recipe-select');
+
+  dropdown.addEventListener('change', (e)=> {
+    window.location = e.target.value;
+  })
 }
 
 
@@ -579,7 +735,11 @@ barba.init({
   transitions: [
     {
       leave({ current, next, trigger }) {
-        // closeMenu();
+        menuTL.reverse();
+        setTimeout(() => {
+          menu.classList.add('o-0');
+          menu.classList.add('pointers-none');
+        }, 1200);
 
         return new Promise((resolve) => {
           const timeline = gsap.timeline({
@@ -639,13 +799,14 @@ barba.init({
     {
       namespace: 'recipes', 
       afterEnter (data) {
-        carrousel();
+        // carrousel();
+        recipeDropdown();
       }
     },  {
       namespace: 'recipe', 
       afterEnter(data) {
         let index = Array.prototype.slice.call(document.querySelectorAll('.recipe-index h2'));
-        let sections = Array.prototype.slice.call(document.querySelectorAll('.recipe-section .mission h1'));
+        let sections = Array.prototype.slice.call(document.querySelectorAll('.recipe-content .mission h1'));
         scrollTo(index, sections);
       }
     },
@@ -654,6 +815,12 @@ barba.init({
       afterEnter (data) {
         lifestyle();
       }
+    },
+    {
+      namespace: 'archive',
+      afterEnter(data){ 
+        recipeDropdown();
+      },
     }
 
   ],
@@ -675,7 +842,6 @@ window.addEventListener('resize', () => {
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
-
 
 
 

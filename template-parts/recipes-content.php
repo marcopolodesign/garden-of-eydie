@@ -1,5 +1,5 @@
 <div class="recipe-content flex column-mobile justify-between relative container mv5">
-				<div class="sticky relative-mobile w-20-ns" style="top: 150px; height: max-content">
+				<div class="sticky relative-m w-20-ns no-print" style="top: 150px; height: max-content">
 					<div class="recipe-index pa4 flex flex-column items-center">
 							<h1 class="tc ttu mb3 w-max">Index</h1>
 							<?php if( have_rows('recipe_content') ): while( have_rows('recipe_content') ): the_row(); ?>
@@ -14,18 +14,15 @@
 				</div>
 
 				<div class="w-60-ns recipe-content">
-					<?php if( have_rows('recipe_content') ): while( have_rows('recipe_content') ): the_row(); ?>
+					<?php 
+						the_content(); ?>
 
-					<div class="recipe-section mt4">
-						<div class="flex jic mission mb3">
-							<h1 class="ttu pr4 w-max" style="border-bottom: none !important;"><?php the_sub_field('title');?></h1>
-							<span></span>
-						</div>
-						<?php the_sub_field('content');?>
+					<div class="content-closure">
+						<button onclick="window.print()" class="anchor mt4 print-button flex items-center no-print bg-main-color pa3 w-100 justify-center">
+							<?php get_template_part('template-parts/content/print');?>
+							<h2 class="ttu black ml3">Print this recipe</h2>
+						</button>
 					</div>
-
-					<?php endwhile; endif;?>
-
 				</div>
 
 			</div>

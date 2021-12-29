@@ -1,25 +1,11 @@
-<section class="flex justify-between relative recipes-archive-container ph5">
-  <div class="sticky sticky-top h-max w-30-ns">
+<section class="flex justify-between column-mobile relative recipes-archive-container ph5">
+  <div class="sticky sticky-top relative-m h-max w-30-ns">
     <?php if (!is_search()): ?>
     <p class="grey ttu"><span class="flex items-center"><a href="/recipes" class="has-after grey">Recipes > </a> <a class="has-after grey"><?php single_cat_title();?></a></span></p>
 
     <h1 class="mt3 f1 ttu"><?php single_cat_title();?></h1>
     <ul class="sub-categories-list flex flex-wrap mt4">
       <?php 
-
-      // $args = array(
-      //   'child_of' => get_queried_object_id(),
-      //   'hierarchical' =>1 ,
-      //   'title_li'     => "",
-      //   "orderby" => 'name',
-      //   "post_per_page" => -1,
-      // );
-
-      // $subCats = get_categories($args);
-      // foreach ($subCats as $cat) :
-      //   $name = $cat->name; 
-      //   echo $name;
-      // endforeach;
       wp_list_categories(
         array(
             'child_of' => get_queried_object_id(), // this will be ID of current category in a category archive
@@ -31,8 +17,9 @@
     </ul>
 
     <div class="relative mt5 mb3 w-max">
-      <select class="sub-list-select">
-        <option><?php single_cat_title();?></option>
+      <select class="sub-list-select recipe-select">
+        <option disabled><?php single_cat_title();?></option>
+        <?php get_template_part('template-parts/recipe-options');?>
       </select>
 
       <a href="/recipes" class="absolute top-50 right-50" >

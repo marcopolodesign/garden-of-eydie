@@ -33,7 +33,7 @@ $moreSpacing = get_field('mt_true');
     <div class="slide-img absolute z-2">
       <img src=<?php the_sub_field('image');?>>
     </div>
-    <div class="slide-bg flex absolute w-100 h-100">
+    <div class="slide-bg flex column-mobile absolute w-100 h-100">
         <div class="w-70-ns relative" >
             <div class="absolute-cover s-bg-color" style="background-color: <?php the_sub_field('background_color');?>"></div>  
         </div>
@@ -55,7 +55,7 @@ $moreSpacing = get_field('mt_true');
 </section>
 
 
-<section class="posts-content-scroll mv6">
+<section class="posts-content-scroll title-holder mv6">
   <h2 class="post-content-title pa3 f2 w-max mb4 tc center ttu" style="background-color: <?php the_sub_field('title_background');?> ; color: <?php the_sub_field('title_color');?>">Latest posts<?php the_sub_field('title');?></h2>
   <div class="post-grid-scroll-container container-left w-100 overflow-scroll">
     <div class="w-max flex">
@@ -66,6 +66,7 @@ $moreSpacing = get_field('mt_true');
           'posts_per_page' => 8,
           'order'=> 'DESC',
           'cat' => $cat,
+          'category__not_in' => '23'
       );
 
       $post_query = new WP_Query($postGrid);
@@ -82,7 +83,7 @@ $moreSpacing = get_field('mt_true');
   <a href='/blog' class="f2 main-font main-cta w-max no-deco anchor center mt4 bg-main-color white pa3" style="display: block">VIEW ALL</a>
 </section>
 
-<section class="bg-main-color container pv5">
+<section class="bg-main-color container pv5 transformation-home">
   <div class="mv3">
       <h1 class="f0 tc main-font lh1 ttu" style="color:<?php echo $mainColor;?>">Real Food for Real
       </h1>
@@ -98,7 +99,7 @@ $moreSpacing = get_field('mt_true');
     </div>
 
     <form method="get" class="flex w-80-ns center home-search" id="searchform" action="<?php bloginfo('url'); ?>">
-        <div class="flex w-100 jic">
+        <div class="flex column-mobile w-100 jic">
           <div class="flex items-center search-text" style="flex: 1">
           <svg width="24" height="24" class="mr2" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M25 25L19.3335 19.3234L25 25ZM22.4737 11.7368C22.4737 14.5844 21.3425 17.3154 19.3289 19.3289C17.3154 21.3425 14.5844 22.4737 11.7368 22.4737C8.88925 22.4737 6.1583 21.3425 4.14475 19.3289C2.1312 17.3154 1 14.5844 1 11.7368C1 8.88925 2.1312 6.1583 4.14475 4.14475C6.1583 2.1312 8.88925 1 11.7368 1C14.5844 1 17.3154 2.1312 19.3289 4.14475C21.3425 6.1583 22.4737 8.88925 22.4737 11.7368V11.7368Z" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
@@ -110,13 +111,13 @@ $moreSpacing = get_field('mt_true');
         </div>
       </form>
 
-      <div class="flex jic mt5 w-60-ns center">
-        <a href="/recipes" class="white ttu has-after f2 main-font">Recipes</a>
-        <a href="/lifestyle" class="white ttu has-after f2 main-font">Lifestyle</a>
-        <a href="/learn" class="white ttu has-after f2 main-font">Learn</a>
-        <a href="/about-us" class="white ttu has-after f2 main-font">Connect</a>
+    <div class="flex column-mobile jic mt5 w-60-ns center">
+      <a href="/recipes" class="white ttu has-after f2 main-font">Recipes</a>
+      <a href="/lifestyle" class="white ttu has-after f2 main-font">Lifestyle</a>
+      <a href="/learn" class="white ttu has-after f2 main-font">Learn</a>
+      <a href="/about-us" class="white ttu has-after f2 main-font">Connect</a>
 
-      </div>
+    </div>
       
 
 </section>

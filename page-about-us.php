@@ -1,6 +1,6 @@
 <?php get_header(); ?>
 
-<main id="main" data-barba="container" data-barba-namespace="about" class="faq no-mt" bg-color="white">
+<main id="main" data-barba="container" data-barba-namespace="about" class="about no-mt" bg-color="white">
 
 <section class="relative pv4">
   <?php get_template_part('template-parts/headers/animated-header');?>

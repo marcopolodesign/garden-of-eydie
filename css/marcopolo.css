@@ -530,6 +530,10 @@ p.lh1 {
   margin-left: 20px;
 }
 
+.header-nav .sub-menu li {
+  margin-left: 0px;
+}
+
 .has-hover-items:hover a {
   opacity: 0.3;
 }
@@ -653,6 +657,78 @@ p.lh1 {
 
 .small-icon {
   height: 8px;
+}
+
+/* Sub Menu w/ animation */
+
+.slide-sub-menu::after {
+  content: '';
+  background-image: url(/wp-content/uploads/2021/09/drop-down.svg);
+  width: 15px;
+  height: 9px;
+  display: inline-flex;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.slide-sub-menu > a {
+  z-index: 100;
+  position: relative;
+}
+
+.slide-sub-menu ul.sub-menu {
+  position: fixed;
+  width: 30%;
+  height: 100vh;
+  background-color: var(--mainColor);
+  top: 0;
+  left: 0;
+  padding: 50px 4rem;
+  color: black;
+  list-style-type: none;
+  z-index: 99;
+  padding-top: 80px;
+  transition: var(--smooth);
+  pointer-events: none;
+  overflow: scroll;
+}
+.slide-sub-menu ul.sub-menu li {
+  margin-left: 0;
+}
+
+.slide-sub-menu ul.sub-menu * {
+  color: black;
+  font-family: var(--mainFont);
+  font-size: 2rem;
+}
+
+.slide-sub-menu ul.sub-menu li {
+  margin-bottom: 15px;
+}
+
+.slide-sub-menu :hover > a {
+  color: black;
+}
+
+.slide-sub-menu :hover > a::after {
+  transform: scaleX(1);
+}
+
+.slide-sub-menu:hover ul.sub-menu {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.sub-menu-bg {
+  transition: var(--smooth);
+  z-index: 97;
+  background-color: #ffffff8a;
+}
+
+.sub-menu-bg.active {
+  opacity: 1;
+  pointer-events: all;
 }
 
 /* FILTERS CATEGORY */
@@ -975,6 +1051,14 @@ span.white {
   border-radius: 40px;
 }
 
+.br-soft {
+  border-radius: 8px;
+}
+
+.br-medium {
+  border-radius: 20px;
+}
+
 .white-border {
   border: 1px solid white;
 }
@@ -1015,7 +1099,7 @@ span.white {
 }
 
 .marco-carrousel > div:first-child {
-  padding-left: 7vw;
+  padding-left: 7.5vw;
 }
 
 .carrousel-image:last-child {
@@ -1138,7 +1222,8 @@ span.white {
   opacity: 1;
 }
 
-.social-sharer a {
+.social-sharer a,
+.social-sharer button {
   height: 48px;
   width: 48px;
   text-align: center;
@@ -1156,10 +1241,19 @@ span.white {
   width: 18px;
 }
 
+.social-sharer button svg {
+  width: 24px;
+}
+
 .social-sharer svg {
   width: 28px;
   height: auto;
   margin: auto;
+}
+
+.social-sharer button svg path {
+  stroke: var(--grey) !important;
+  fill: unset !important;
 }
 
 .social-sharer svg path {
@@ -1167,8 +1261,13 @@ span.white {
   transition: fill 0.3s ease;
   stroke: unset !important;
 }
+.social-sharer > * {
+  margin-right: 5px;
+  margin-left: 5px;
+}
 
-.social-sharer a span {
+.social-sharer a span,
+.social-sharer button span {
   position: absolute;
   white-space: pre;
   pointer-events: none;
@@ -1178,7 +1277,8 @@ span.white {
   color: var(--mainColor);
 }
 
-.social-sharer.hs-container a span {
+.social-sharer.hs-container a span,
+.social-sharer button span {
   position: absolute;
   white-space: pre;
   left: 0px;
@@ -1194,7 +1294,8 @@ span.white {
   transition: all 0.3s ease;
 }
 
-.social-sharer a:hover {
+.social-sharer a:hover,
+.social-sharer button:hover {
   border-color: var(--mainColor);
   background-color: var(--mainColor);
 }
@@ -1203,7 +1304,13 @@ span.white {
   fill: #fff;
 }
 
-.social-sharer a:hover span {
+.social-sharer button:hover svg path {
+  stroke: #fff !important;
+  fill: unset !important;
+}
+
+.social-sharer a:hover span,
+.social-sharer button:hover span {
   opacity: 1;
 }
 
@@ -1211,7 +1318,24 @@ span.white {
   display: none;
 }
 
+@media (max-width: 960px) {
+  .container-left {
+    padding-left: 80px;
+  }
+
+  .container {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+}
+
 @media (max-width: 768px) {
+  /* iPad tablet Generals */
+
+  .f1 {
+    font-size: 2.5rem;
+  }
+
   .container-left {
     padding-left: 60px;
   }
@@ -1220,7 +1344,8 @@ span.white {
     padding-right: 60px;
   }
 
-  .container {
+  .container,
+  .container-xl {
     padding-left: 60px;
     padding-right: 60px;
   }
@@ -1248,8 +1373,74 @@ span.white {
     display: block;
   }
 
+  .desktop {
+    display: none;
+  }
+
+  h1,
+  .f1,
+  .home-starter h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+  }
+
+  .f2 {
+    font-size: 1.5rem;
+  }
+
+  .f3 {
+    font-size: 1.25rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  .mb4 {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .pt4 {
+    padding-top: 1rem;
+  }
+
+  .pa5 {
+    padding: 1.2rem;
+  }
+
+  .pv5 {
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+  }
+
+  .mt5 {
+    margin-top: 1.2rem;
+  }
+
+  .ph5 {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+
+  .pv6 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
   .column-mobile {
     flex-direction: column;
+  }
+
+  .column-mobile > div {
+    width: 100%;
+  }
+
+  .column-mobile > input {
+    width: 100%;
   }
 
   .container-left {
@@ -1261,7 +1452,9 @@ span.white {
   }
 
   .container,
-  .container-xs {
+  .container-m,
+  .container-xs,
+  .container-xl {
     padding-left: 20px;
     padding-right: 20px;
   }
@@ -1280,11 +1473,107 @@ span.white {
     display: none;
   }
 
-  /* ---- MARGINS------ */
+  .jac-m {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .relative-m {
+    position: relative;
+    top: 0 !important;
+  }
+
+  .w-100-m {
+    width: 100% !important;
+  }
+
+  /* ---- MARGINS & Paddings------ */
+
+  h1,
+  .f1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.45rem;
+  }
+
+  .f2 {
+    font-size: 1.5rem;
+  }
+
+  .f3 {
+    font-size: 1.25rem;
+  }
+
+  .mb4 {
+    margin-top: 1.2rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .pa5 {
+    padding: 1.2rem;
+  }
+
+  .mb5 {
+    margin-bottom: 1.2rem;
+  }
+
+  .pv5 {
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+  }
+
+  .ph5 {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+  }
+
+  .pv6 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
 
   .mv6 {
     margin-top: 5rem;
     margin-bottom: 5rem;
+  }
+
+  /* INSTA MOBILE */
+  .instagram-feed {
+    flex-direction: column;
+  }
+
+  .instagram-feed > div {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .instagram-feed-container > div {
+    margin-bottom: 10px;
+  }
+
+  .ig-aob {
+    padding-left: 0;
+    padding-right: 0;
+    justify-content: flex-start;
+  }
+
+  .ig-aob > div:first-child {
+    margin-right: 25px;
+  }
+
+  .ig-aob p {
+    font-size: 18px;
+  }
+
+  .ig-aob img {
+    height: 13px !important;
+  }
+
+  .instagram-feed a,
+  .instagram-feed > div {
+    width: 100% !important;
   }
 
   /*  ---- START GENERALS ----- */
