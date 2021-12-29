@@ -3,7 +3,7 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/qk2gfmw4ollu/public_html/wp-content/themes/gardenofeydie
     # - /bin/cp -r * $DEPLOYPATH
-    - cp page-lifestyle.php $DEPLOYPATH
-    - cp /css/custom.css $DEPLOYPATH
-    - cp css/custom.css $DEPLOYPATH
-    - cp template-parts/reusable-content.php $DEPLOYPATH
+    - /bin/cp page-lifestyle.php $DEPLOYPATH
+    - /bin/cp /css/custom.css $DEPLOYPATH
+    - /bin/cp css/custom.css $DEPLOYPATH
+    - /bin/cptemplate-parts/reusable-content.php $DEPLOYPATH
