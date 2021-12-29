@@ -46,7 +46,7 @@
     $overlapTop = get_sub_field('overlap'); if ($overlapTop): $overlapTop = 'overlap-top'; endif;  
   ?>
 
-  <div class="flex justify-between items-center mb5-ns mt4-ns <?php echo $isReverse; echo $overlapTop?>">
+  <div class="flex justify-between column-mobile items-center mb5-ns mt4-ns <?php echo $isReverse; echo $overlapTop?>">
     <div class="about-text w-50-ns measure">
         <?php the_sub_field('about_text');?>
     </div>

@@ -10,6 +10,7 @@
 
       $subCats = get_categories($args);
       foreach ($subCats as $cat) : 
-        $name = $cat->name; ?>
+        $name = $cat->name; 
+        if ($cat->count> 0 ) :?>
         <option value="<?php echo home_url() . '/category/recipe/' . $cat->slug;?> "><?php echo $cat->name;?></option>
-<?php  endforeach; ?>
+<?php  endif; endforeach; ?>

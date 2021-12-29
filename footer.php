@@ -13,12 +13,12 @@
 
 </div> <!-- End Barba Container -->
 
-	<footer id="colophon" class="site-footer mt6">
+	<footer id="colophon" class="site-footer mt6 no-print">
 	<section class="instagram-feed-container mv5 container-xs">
-	<div class="flex jic">
-		<a href="http://instagram.com/lovesweatfitness" target="_blank" class="ttu main-color db mb4 fw7 f3 tc db flex justify-center items-center">
+	<div class="flex jic column-mobile gram-text-container">
+		<a href="http://instagram.com/lovesweatfitness" target="_blank" class="ttu main-color db mb4 fw7 f3 tc db flex justify-center items-center column-mobile">
 			<?php get_template_part('template-parts/content/insta');?>
-			<h2 class="ttu f3 black ml3 mt1">Follow us on the Gram!</h2>	
+			<h2 class="ttu f3 black ml3 mt1 gram-text">Follow us on the Gram!</h2>	
 		</a>
 
 		<h2 class="ttu f3 black ml3 mt1">@GardenOfEydie</h2>	
@@ -26,7 +26,7 @@
 
 	</div>
 	
-		<div class="instagram-feed flex flex-wrap  justify-between">
+		<div class="instagram-feed flex flex-wrap justify-between column-mobile">
 		<!-- Loading... -->
 		</div>
 		<a href="http://instagram.com/gardenofeydie" target="_blank" class="tc center ttu lsf-pink mt2 fw7 f2 dn relative">FOLLOW US</a>
@@ -81,10 +81,10 @@
 		
 			</div>
 
-			<div class="flex flex-column justify-between items-end">
+			<div class="flex flex-column justify-between items-end jac-m">
 				<div class="footer-aob ">
-					<ul class="list-none flex">
-					<li class="mr3"><a href="no-deco has-after grey">Terms & Conditions</a></li>
+					<ul class="list-none flex column-mobile jac-m">
+					<li class="mr3-ns"><a href="no-deco has-after grey">Terms & Conditions</a></li>
 					<li class=""><a href="no-deco has-after gery">Privacy Policy</a></li>
 				</ul>
 				</div>

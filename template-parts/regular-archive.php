@@ -6,6 +6,7 @@
 					'post_type' => 'post',
 					'posts_per_page' => 1,
 					'order'=> 'DESC',
+					'cat' => get_queried_object_id(),
 			);
 			$post_query = new WP_Query($catPost);
 			if($post_query->have_posts() ) : while($post_query->have_posts() ) :
@@ -29,6 +30,8 @@
 					'post_type' => 'post',
 					'posts_per_page' => 9,
 					'order'=> 'DESC',
+					'cat'=> get_queried_object_id(),
+
 			);
 			$post_query = new WP_Query($lifestylePosts);
 			if($post_query->have_posts() ) : while($post_query->have_posts() ) :

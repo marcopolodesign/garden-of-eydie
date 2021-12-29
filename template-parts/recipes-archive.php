@@ -1,5 +1,5 @@
-<section class="flex justify-between relative recipes-archive-container ph5">
-  <div class="sticky sticky-top h-max w-30-ns">
+<section class="flex justify-between column-mobile relative recipes-archive-container ph5">
+  <div class="sticky sticky-top relative-m h-max w-30-ns">
     <?php if (!is_search()): ?>
     <p class="grey ttu"><span class="flex items-center"><a href="/recipes" class="has-after grey">Recipes > </a> <a class="has-after grey"><?php single_cat_title();?></a></span></p>
 
@@ -17,12 +17,12 @@
     </ul>
 
     <div class="relative mt5 mb3 w-max">
-      <select class="sub-list-select">
-        <option><?php single_cat_title();?></option>
+      <select class="sub-list-select recipe-select">
+        <option disabled><?php single_cat_title();?></option>
         <?php get_template_part('template-parts/recipe-options');?>
       </select>
 
-      <a href="javascript:history.back()" class="absolute top-50 right-50" >
+      <a href="/recipes" class="absolute top-50 right-50" >
         <svg style="transform: translate(-50%, -50%)" width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="11" cy="11" r="11" fill="black"/>
           <path d="M14.2356 8.41162L8.41211 14.2352" stroke="white"/>

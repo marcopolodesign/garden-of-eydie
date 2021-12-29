@@ -1,4 +1,4 @@
-<div class="fixed menu-container o-0 pointers-none top-0 left-0 min-h-100-vh w-100 pa5-ns ">
+<div class="fixed menu-container o-0 pointers-none top-0 left-0 min-h-100-vh w-100 pa5-ns no-print">
   <nav class="side-menu relative ph3-ns">
     <div class="mb5 flex jic w-100">
       <div style="transform: scale(0.7); transform-origin: left">
