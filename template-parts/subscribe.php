@@ -18,8 +18,7 @@
     <p class="tc mb4 measure-wide center"><?php echo $formDescription; ?></p>
   <?php else : echo '<p class="mv2"></p>'; endif;?>
   <div class="relative z-3 form-container ph3 pv4 center w-60-ns">
-    <form action="https://mirandabosch.us8.list-manage.com/subscribe/post?u=ccec1786ad424af2159139752&amp;id=7e6f5d10c0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate flex justify-center items-center pb2" validate>
-
+    <form action="https://gardenofeydie.us19.list-manage.com/subscribe/post?u=7a576c5bf87cb3e807ab2b41d&amp;id=b79614bb3d" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate flex justify-center items-center pb2" validate>
       <?php get_template_part('template-parts/content/inbox'); ?>
     <input type="email" value="" required placeholder="<?php echo $formPlaceholder;?>" name="EMAIL" class="required f3 email main-font w-70-ns ml3" id="mce-EMAIL">
     <div id="mce-responses" class="clear">
