@@ -1427,6 +1427,40 @@ a.post-container {
     width: 70vw;
   }
 
+  /* Lifestlye Mobile */
+
+  .lifestyle-cover > div:first-child {
+    width: 100%;
+    margin: 80px 20px;
+  }
+
+  h1.lifestyle-desktop-heading {
+    top: 0;
+    padding-top: 100px;
+    font-size: 60px !important;
+    color: #000 !important;
+    opacity: 1;
+  }
+
+  .lifestyle-cat {
+    width: 90vw;
+    height: 40vh;
+    margin: 20px 0px;
+  }
+
+  .lifestyle-cat div.absolute-cover {
+    /* padding: ; */
+  }
+
+  .lifestyle-cover h1 {
+    font-size: 45px;
+    color: white;
+  }
+
+  .lifestyle-cover h1.small-font {
+    font-size: 180px;
+  }
+
   /* Recipes Mobile */
 
   .recipe-select {

@@ -148,18 +148,22 @@
 
       <?php elseif (get_row_layout() == 'post_grid_scroll'): ?>
         <div class="posts-content-scroll mv6">
-        <div class="container title-holder flex justify-between items-start mb5">
-          <div class="flex flex-column title-holder">
-            <h2 class="post-content-title pa3 f2 white w-max " style="background-color: <?php the_sub_field('title_background');?> ; color: <?php the_sub_field('title_color');?>"><?php the_sub_field('title');?></h2>
-            <p class="grey mt3 measure lh1"><?php echo get_sub_field('explanatory_text');?></p>
+          <div class="container title-holder flex justify-between items-start mb5">
+            <div class="flex flex-column title-holder">
+              <h2 class="post-content-title pa3 f2 white w-max " style="background-color: <?php the_sub_field('title_background');?> ; color: <?php the_sub_field('title_color');?>"><?php the_sub_field('title');?></h2>
+              <p class="grey mt3 measure lh1"><?php echo get_sub_field('explanatory_text');?></p>
+            </div>
+            <?php 
+            $cat = get_sub_field('post_category_id'); 
+            $catLink = get_category_link($cat);
+            ?>
+
+            <a href=<?php echo esc_url($catLink); ?> class="f2 main-font has-after anchor">VIEW ALL</a>
           </div>
-          
-          <a class="f2 main-font has-after anchor">VIEW ALL</a>
-        </div>
           <div class="post-grid-scroll-container container-left w-100 overflow-scroll">
             <div class="w-max flex">
             <?php 
-              $cat = get_sub_field('post_category_id');
+              
               $postGrid = array(
                   'post_type' => 'post',
                   'posts_per_page' => 8,

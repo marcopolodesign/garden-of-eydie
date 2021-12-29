@@ -3,7 +3,7 @@
 <main id="main" data-barba="container" data-barba-namespace="lifestyle" class="home" bg-color="white">
 
 <div class="lifestyle-cover min-h-100 flex relative">
-  <div class="flex flex-wrap items-center justify-center m-auto">
+  <div class="flex flex-wrap column-mobile items-center justify-center m-auto">
 
     <?php $lifestyle = array('child_of' => 2);
  
@@ -12,14 +12,17 @@
 
       $catID = $category -> term_id;
       $image = get_field('category_image', $category);
+      $link = get_category_link( $catID );
     
     ?>
-        <a href="<?php get_category_link( $catID ); ?>" class="lifestyle-cat relative ma4" cat-name="<?php echo $category->name;?>" >
+        <a href="<?php echo esc_url($link); ?>" class="lifestyle-cat relative ma4" cat-name="<?php echo $category->name;?>">
           <div class="absolute-cover" style="background-image: url(<?php echo $image;?>"></div>
+          <div class="absolute-cover black-overlay mobile"></div>
+          <div class="mobile absolute-center z-3"><h1 class="lifestyle-cat-name white ttu tc f1"><?php echo $category->name;?></h1></div>
         </a>
       <?php endforeach; ?>
   </div>
-  <h1 class="black absolute-center z--1 tc ttu pointers-none">Lifestyle</h1>
+  <h1 class="black absolute-center z--1 tc ttu pointers-none lifestyle-desktop-heading">Lifestyle</h1>
 </div>
 
 
