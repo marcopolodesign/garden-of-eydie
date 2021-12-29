@@ -7,3 +7,4 @@ deployment:
     - /bin/cp /css/custom.css $DEPLOYPATH
     - /bin/cp css/custom.css $DEPLOYPATH
     - /bin/cp template-parts/reusable-content.php $DEPLOYPATH
+    - /bin/cp template-parts/subscribe.php $DEPLOYPATH
