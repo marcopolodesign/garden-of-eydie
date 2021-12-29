@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/qk2gfmw4ollu/public_html/wp-content/themes/gardenofeydie
+    - /bin/cp -R * $DEPLOYPATH

@@ -125,7 +125,6 @@
       <div class="pv5">
         <div class="container title-holder flex jic mb5">
           <h2 class="post-content-title pa3 f2 white w-max " style="background-color: <?php the_sub_field('title_background');?> ; color: <?php the_sub_field('title_color');?>"><?php the_sub_field('section_title');?></h2>
-          <a class="f2 main-font has-after anchor">VIEW ALL</a>
         </div>
 
         <div class="testimonials-container container-left w-100 overflow-scroll">
