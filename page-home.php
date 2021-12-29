@@ -5,7 +5,7 @@ $moreSpacing = get_field('mt_true');
 
 <main id="main" data-barba="container" data-barba-namespace="home" class="home no-mt" bg-color="white testing-deployment">
 
-<section class="home-slider-container relative w-100 min-h-100-vh">
+<section class="home-slider-container relative w-100 min-h-100-vh testing commit">
 
   
   <?php 
