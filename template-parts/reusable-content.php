@@ -51,13 +51,14 @@
           else :
             get_template_part( 'template-parts/content', 'none' );
           endif; wp_reset_postdata(); ?>
-    </div>
-
-    <?php $link = get_sub_field('link');
+      </div>
+		
+		<?php $link = get_sub_field('link');
         if ($link):
           $link_target =  $link['target'] ? $link['target'] : '_self'; ?>
           <a target=<?php echo esc_attr( $link_target ); ?> href=<?php echo esc_url($link['url']) ;?> class="db f5 fw6 mt4 mb4 no-deco white w-max pa3" style="background-color: <?php the_sub_field('main_color');?>"><?php echo esc_attr($link['title']) ;?></a>
         <?php endif;?>
+		
 
     </div>
 

@@ -3,9 +3,11 @@ $mainColor = get_field('main_color');
 $moreSpacing = get_field('mt_true');
 ?>
 
-<main id="main" data-barba="container" data-barba-namespace="home" class="home no-mt" bg-color="white testing-deployment">
+<main id="main" data-barba="container" data-barba-namespace="home" class="home no-mt" bg-color="white">
 
 <section class="home-slider-container relative w-100 min-h-100-vh">
+
+  
   <?php 
     $slider = get_field('slider');
     $amount = count($slider);
@@ -78,7 +80,7 @@ $moreSpacing = get_field('mt_true');
     </div>
   </div>
 
-  <a href='/blog' class="f2 main-font main-cta w-max no-deco anchor center mt4 bg-main-color white pa3" style="display: block">VIEW ALL</a>
+  <a href='/category/blog/' class="f2 main-font main-cta w-max no-deco anchor center mt4 bg-main-color white pa3" style="display: block">VIEW ALL</a>
 </section>
 
 <section class="bg-main-color container pv5 transformation-home">

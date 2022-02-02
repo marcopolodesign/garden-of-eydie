@@ -1148,6 +1148,35 @@ a.post-container {
   color: white;
 }
 
+/*  pagination */
+
+nav.pagination {
+  display: flex;
+  width: 100%;
+  margin: 70px auto;
+}
+
+nav.pagination .nav-links {
+  margin: auto;
+}
+
+nav.pagination .nav-links a,
+nav.pagination .nav-links span {
+  color: #000;
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: var(--mainDarkColor);
+  border-radius: 2px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+nav.pagination .nav-links span.current,
+nav.pagination .nav-links a:hover {
+  background-color: var(--mainDarkColor);
+  color: #000;
+}
+
 /* Single Cat Recipe Page */
 
 .sub-categories-list a {
@@ -1664,6 +1693,14 @@ a.post-container {
 
   .faq-answer p {
     line-height: 1.2;
+  }
+
+  /* Nav Links Mobile */
+
+  .nav-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 }
 
