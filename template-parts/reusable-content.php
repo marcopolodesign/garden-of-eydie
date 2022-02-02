@@ -51,7 +51,13 @@
           else :
             get_template_part( 'template-parts/content', 'none' );
           endif; wp_reset_postdata(); ?>
-      </div>
+    </div>
+
+    <?php $link = get_sub_field('link');
+        if ($link):
+          $link_target =  $link['target'] ? $link['target'] : '_self'; ?>
+          <a target=<?php echo esc_attr( $link_target ); ?> href=<?php echo esc_url($link['url']) ;?> class="db f5 fw6 mt4 mb4 no-deco white w-max pa3" style="background-color: <?php the_sub_field('main_color');?>"><?php echo esc_attr($link['title']) ;?></a>
+        <?php endif;?>
 
     </div>
 
@@ -187,7 +193,7 @@
       <?php elseif (get_row_layout() == 'covers'): ?>
       <div class="flex items-stretch learn-cats column-mobile mt5 container ">
           <?php while ( have_rows('categories') ) : the_row();?>
-        <a href="<?php the_sub_field('link')['target'];?>" class="relative mh3 w-50-ns cover-cat">
+        <a href="<?php the_sub_field('link');?>" class="relative mh3 w-50-ns cover-cat">
             <div class="pa5 flex flex-column jic relative z-4">
               <h1 class="tc ttu f0"><?php the_sub_field('title');?></h1>
               <h2 class="tc"><?php the_sub_field('description');?></h2>

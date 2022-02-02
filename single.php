@@ -16,7 +16,9 @@ get_header();
 		while ( have_posts() ) :
 			the_post(); ?>
 
-			<h1 class="ttu f0 tc pt5-ns ph6-ns"><?php the_title();?></h1>
+			<h1 itemprop="name" class="ttu f0 tc pt5-ns ph6-ns" ><?php the_title();?></h1>
+
+			<meta itemprop="url" content=<?php the_permalink();?>>
 			<img class="container mv4-ns no-print" src=<?php the_post_thumbnail_url('full');?>>
 
 			<div class="featured-text container-xl m-auto">
@@ -29,14 +31,14 @@ get_header();
 					<?php if (get_field('cooking_time')): ?>
 					<div class="flex items-center mr5">
 						<?php get_template_part('template-parts/content/time');?>
-						<h2 class="main-font ml3 f3"><?php the_field('cooking_time');?> minutes cooking time</h2>
+						<h2 class="main-font ml3 f3" itemprop="totalTime"><?php the_field('cooking_time');?> minutes cooking time</h2>
 					</div>
 					<?php endif;?>
 
 					<?php if (get_field('ammout_of_servings')): ?>
 					<div class="flex items-center mr5">
 						<?php get_template_part('template-parts/content/serves');?>
-						<h2 class="main-font f3 ml3"><?php the_field('ammout_of_servings');?> Serves</h2>
+						<h2 class="main-font f3 ml3" itemprop="recipeYield"><?php the_field('ammout_of_servings');?> Serves</h2>
 					</div>
 					<?php endif;
 

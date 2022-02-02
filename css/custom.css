@@ -128,6 +128,8 @@ div.main-font * {
 header {
   transition: background-color 0.3s ease;
   z-index: 90;
+  background-color: #fff;
+  border-bottom: 1px solid black;
 }
 
 .header-social a:first-child {
@@ -679,6 +681,11 @@ a.post-container {
   height: 1px;
 }
 
+.image-2 {
+  z-index: 3;
+  position: relative;
+}
+
 /* Lifestlye Desktop */
 
 .lifestyle-cat {
@@ -1061,7 +1068,8 @@ a.post-container {
   letter-spacing: -0.3;
 }
 
-.recipe-content ul {
+.recipe-content ul,
+.recipe-content ol {
   column-count: 2;
   column-gap: 40px;
   margin-bottom: 30px;
@@ -1069,6 +1077,10 @@ a.post-container {
   list-style-position: outside;
   /* list-style-type: none; */
   padding-left: 20px;
+}
+
+.recipe-content ol {
+  column-count: 1 !important;
 }
 
 @media (max-width: 580px) {
@@ -1079,12 +1091,14 @@ a.post-container {
 
 /* .recipe-content ul li:first-child {} */
 
-.recipe-content ul li {
+.recipe-content ul li,
+.recipe-content ol li {
   position: relative;
   margin-bottom: 10px;
 }
 
-.recipe-content ul li:before {
+.recipe-content ul li:before,
+.recipe-content ol li:before {
   /* content: '\02022'; */
   margin-right: 8px;
   font-size: 1.5rem;
@@ -1497,6 +1511,10 @@ a.post-container {
 
   /* Single Recipe Mobile */
 
+  .recipe-content {
+    overflow-x: hidden;
+  }
+
   main.recipe > h1:first-child {
     padding: 50px 0px;
   }
@@ -1667,8 +1685,8 @@ a.post-container {
   .container-xl,
   .container,
   .container-xs {
-    padding-left: 120px;
-    padding-right: 120px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   figure {
@@ -1679,8 +1697,12 @@ a.post-container {
     text-align: left;
     max-width: 60;
     margin: auto;
-    padding-left: 120px;
-    padding-right: 120px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin-bottom: 10px;
+  }
+
+  .recipe-content {
+    margin-top: 0;
   }
 }

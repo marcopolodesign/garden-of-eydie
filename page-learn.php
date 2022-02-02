@@ -11,7 +11,7 @@ get_header();?>
 
 <?php  get_template_part('template-parts/reusable-content'); ?>
 
-<section class="goe-articles container bg-main-color dn pa6">
+<section class="goe-articles container bg-main-color flex pa6">
   <div class="m-auto w-60-ns flex flex-column justify-center">
     <h1 class="white tc ttu f0">Recommended articles we're reading</h1>
     <p class="mt3 white tc">We’re constantly reading things to enrich our own journey towards a better, healthier life. Each week, we narrow down the ones we like the most.</p>

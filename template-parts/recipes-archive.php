@@ -42,6 +42,24 @@
 
   <div class="recipes-archive-content flex flex-wrap jic w-60-ns mr-0">
   <?php
+	  
+	  $qobj = get_queried_object();
+					$category = get_category( get_query_var( 'cat' ) );
+					$cat_id = $category->cat_ID;
+
+					if ( get_query_var('paged') ) {
+
+						$paged = get_query_var('paged');
+						
+						} elseif ( get_query_var('page') ) {
+						
+						$paged = get_query_var('page');
+						
+						} else {
+						
+							$paged = 1;
+					}
+	  
 
       $s = get_search_query();
 			$lifestylePosts = array(
@@ -50,6 +68,7 @@
 					'order'=> 'DESC',
           'cat' => get_queried_object_id(),
           "s"=> $s,
+				'paged'=> $paged,
 			); 
 
 			$post_query = new WP_Query($lifestylePosts);
@@ -59,7 +78,8 @@
 		endwhile; 
 		else :
 			get_template_part( 'template-parts/content', 'none' );
-		endif; wp_reset_postdata();
+		endif; wp_reset_postdata(); the_posts_pagination(array( 'mid_size' => 3, 'next_text'=> __('Next Page'), ));
+	
 		?>
   </div>
 </section>

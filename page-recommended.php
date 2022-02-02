@@ -73,7 +73,7 @@ get_header();?>
     
         <?php  
         endif; endwhile; endif; // end content post
-      endwhile; endif; // End query Loop
+      endwhile; endif; wp_reset_postdata(); // End query Loop
       ?>
     </div>
   </section>
