@@ -18,7 +18,7 @@
 
     <div class="relative mt5 mb3 w-max">
       <select class="sub-list-select recipe-select">
-        <option disabled><?php single_cat_title();?></option>
+        <option disabled ><?php single_cat_title();?></option>
         <?php get_template_part('template-parts/recipe-options');?>
       </select>
 

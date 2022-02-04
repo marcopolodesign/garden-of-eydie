@@ -37,6 +37,24 @@ const runScripts = () => {
     });
   }
 
+
+const isRecipePage = () => {
+  let recipePage = window.location.pathname === '/category/recipe/';
+
+  if (isRecipePage) {
+    document.querySelector('.sub-categories-list').innerHTML = `<h2>Plant based recipes you'll love that will elevate your well being</h2>`
+
+
+    let select = document.querySelector('.recipe-select');
+
+    select.remove(0);
+    // let recipeOption = new Option('Select Recipe','Select Recipe');
+    // select.prepend(recipeOption);
+      }
+}
+
+
+
   animatePosts();
 
   const headerColor = () => {
@@ -187,6 +205,7 @@ const runScripts = () => {
   headerColor();
   // postAnimations();
   initScripts();
+  isRecipePage();
   // fbTrack();
   // googleAnalytics();
   // allCursor();
@@ -743,6 +762,7 @@ const recipeDropdown = () => {
     window.location = e.target.value;
   })
 }
+
 
 
 
