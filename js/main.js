@@ -41,7 +41,7 @@ const runScripts = () => {
 const isRecipePage = () => {
   let recipePage = window.location.pathname === '/category/recipe/';
 
-  if (isRecipePage) {
+  if (recipePage) {
     document.querySelector('.sub-categories-list').innerHTML = `<h2>Plant based recipes you'll love that will elevate your well being</h2>`
 
 

@@ -72,8 +72,7 @@ get_header();?>
     </div>
 	
   <?php get_template_part('template-parts/reusable-content'); ?>
-
-  <a href="/category/recipe/" class="f2 main-font has-after anchor">VIEW ALL</a>
+  <a href="/category/recipe/"  class="f2 main-font main-cta w-max no-deco anchor center mt2 bg-main-color white pa3" style="display: block">VIEW ALL</a>
 
 <style>
 	.new-recipes > a {

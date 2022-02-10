@@ -98,7 +98,7 @@ $moreSpacing = get_field('mt_true');
       ?>
     </div>
 
-    <form method="get" class="flex w-80-ns center home-search" id="searchform" action="<?php bloginfo('url'); ?>">
+    <form method="get" class="flex w-80-ns center home-search barba-prevent" id="searchform" action="<?php bloginfo('url'); ?>">
         <div class="flex column-mobile w-100 jic">
           <div class="flex items-center search-text" style="flex: 1">
           <svg width="24" height="24" class="mr2" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">

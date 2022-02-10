@@ -16,7 +16,7 @@
 	<footer id="colophon" class="site-footer mt6 no-print">
 	<section class="instagram-feed-container mv5 container-xs">
 	<div class="flex jic column-mobile gram-text-container">
-		<a href="http://instagram.com/lovesweatfitness" target="_blank" class="ttu main-color db mb4 fw7 f3 tc db flex justify-center items-center column-mobile">
+		<a href="http://instagram.com/gardenofeydie" target="_blank" class="ttu main-color db mb4 fw7 f3 tc db flex justify-center items-center column-mobile">
 			<?php get_template_part('template-parts/content/insta');?>
 			<h2 class="ttu f3 black ml3 mt1 gram-text">Follow us on the Gram!</h2>	
 		</a>
